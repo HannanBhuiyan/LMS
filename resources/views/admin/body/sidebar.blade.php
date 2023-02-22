@@ -74,6 +74,7 @@
                             <li><a href="{{ route('class-content.create') }}" class="slide-item {{ request()->routeIs('class-content.create') ? 'active' : '' }}">Add Class</a></li>
                         </ul>
                     </li>
+
                     <li class="slide {{ request()->routeIs(['student.index','student.create','student.edit']) ? 'is-expanded' : '' }}">
                         <a class="side-menu__item {{ request()->routeIs(['student.index','student.create','student.edit']) ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
                                 class="side-menu__icon fe fe-user"></i><span
@@ -101,6 +102,13 @@
                         <a class="side-menu__item has-link {{ request()->routeIs('students.management') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('students.management') }}"><i
                                 class="side-menu__icon fe fe-briefcase"></i><span
                                 class="side-menu__label">Student Management</span></a>
+                    </li>
+
+
+                    <li class="slide">
+                        <a class="side-menu__item has-link {{ request()->routeIs('contact.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('contact.index') }}"><i
+                                class="side-menu__icon fe fe-mail"></i><span
+                                class="side-menu__label">Social Links</span></a>
                     </li>
 
                     <li class="slide">

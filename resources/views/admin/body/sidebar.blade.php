@@ -106,9 +106,27 @@
 
 
                     <li class="slide">
-                        <a class="side-menu__item has-link {{ request()->routeIs('contact.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('contact.index') }}"><i
+                        <a class="side-menu__item has-link {{ request()->routeIs('social_links.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('contact.index') }}"><i
                                 class="side-menu__icon fe fe-mail"></i><span
                                 class="side-menu__label">Social Links</span></a>
+                    </li>
+
+
+                    <li class="slide {{ request()->routeIs('social_links*') ? 'is-expanded' : '' }}">
+                        <a class="side-menu__item {{ request()->routeIs('social_links*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
+                                class="side-menu__icon fe fe-user-check"></i><span
+                                class="side-menu__label">Social Link</span><i
+                                class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu"> 
+                            <li><a href="{{ route('social_links.index') }}" class="slide-item {{ request()->routeIs('social_links.index') ? 'active' : '' }}"> Social Link List</a></li>
+                          
+                        </ul>
+                    </li>
+
+                    <li class="slide">
+                        <a class="side-menu__item has-link {{ request()->routeIs('site_logo.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('site_logo.index') }}"><i
+                                class="side-menu__icon fe fe-mail"></i><span
+                                class="side-menu__label">Site logo</span></a>
                     </li>
 
                     <li class="slide">

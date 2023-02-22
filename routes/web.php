@@ -9,36 +9,34 @@ use App\Http\Controllers\backend\{
     Class_contentController,
     CourseController,
     ProfileController,
+    SiteLogoController,
     StudentController,
-    StudentDasdhboardController
+    StudentDasdhboardController,
+    SocialController
 };
 use App\Http\Controllers\frontend\HomeController;
+use Illuminate\Support\Facades\Artisan;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// for migrate cPanel
+Route::get('make/migrate', function(){
+    Artisan::call('migrate');
+});
 
-// Route::get('/', function () {
-//     return view('home');
-// });
+Route::get('/clear-cache', function(){
+    Artisan::call('cache:clear');
+});
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('course/{slug}', [HomeController::class, 'course_show'])->name('home.course');
+
 
 //Contact Form Route
 Route::post('contact', [HomeController::class, 'store'])->name('contact');
 
 
 Route::middleware('admin:admin')->group(function(){
-
     Route::get('/admin/login', [AdminController::class, 'loginForm']);
     Route::post('/admin/login', [AdminController::class, 'store'])->name('admin.login');
 });
@@ -67,11 +65,8 @@ Route::middleware('auth:admin')->group(function(){
 
     Route::get('students/disabled/{id}', [StudentController::class, 'studentDisabled'])->name('students.disabled');
     Route::get('students/active/{id}', [StudentController::class, 'studentActive'])->name('students.active');
-
-
-
-
-
+ 
+ 
     // assign student
     Route::resource('assignstudent', AssignStudentController::class);
     Route::get('assignstudent/delete/{id}', [AssignStudentController::class, 'destroy'])->name('assignstudent.delete');
@@ -89,6 +84,15 @@ Route::middleware('auth:admin')->group(function(){
     //Contact
     Route::get('contact/index', [HomeController::class, 'show'])->name('contact.index');
     Route::get('contact/delete/{id}', [HomeController::class, 'destroy'])->name('contact.delete');
+
+    // social links
+    Route::resource('social_links', SocialController::class);
+    Route::get('social/delete/{id}', [SocialController::class, 'delete'])->name('social_link.delete');
+    
+
+    // site logo
+    Route::resource('site_logo', SiteLogoController::class);
+    Route::get('site/logo/{id}', [SiteLogoController::class, 'delete'])->name('site_logo.delete');
 
 });
 

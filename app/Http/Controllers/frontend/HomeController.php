@@ -5,13 +5,14 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Course;
+use App\Models\SocialLiks;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    
     public function index()
     {
-
         $courses = Course::where('status', 'on')->limit(6)->get();
         return view('home', compact('courses'));
     }
@@ -47,8 +48,10 @@ class HomeController extends Controller
 
     public function destroy($id)
     {
-        $contacts = Contact::findOrFail($id)->delete();
+        Contact::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Contact delete successfully');
     }
+
+     
 
 }

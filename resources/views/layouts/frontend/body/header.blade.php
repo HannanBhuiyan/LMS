@@ -5,7 +5,7 @@
     <div class="container">
         <div class="heading d-flex justify-content-between align-items-center">
             <div class="logo">
-                <a href="{{ route('home') }}"><img src="{{ asset('frontend/assets/image/logo/logo.png') }}" alt="logo"></a>
+                <a href="{{ route('home') }}"><img src="{{ asset(getsitelogo()->site_logo) }}" alt="logo"></a>
             </div>
             <div class="menu d-none d-lg-block">
                 <ul class=" d-flex align-items-center">

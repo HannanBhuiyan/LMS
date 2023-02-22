@@ -1,24 +1,24 @@
 @extends('layouts.frontend.home_master')
 @section('title','Home')
 @section('content')
-<section class="hero__section">
-    <div class="container">
-        <div class="banner__section">
-            <div class="banner__content">
-                <h1>Start your tech <span>journey with us</span></h1>
-                <p>Farjax Tech & Consulting Inc is an IT consulting company headquartered
-                    in New York, USA, providing services like , Business Consulting ,
-                    Application Development & Management , Talent Acquisitions, Job
-                    Placement and training.</p>
-                {{-- <button class="applyBtn">Apply Now</button> --}}
-                <a href="#contact" class="applybutton applyBtn">Apply Now</a>
+    <section class="hero__section">
+        <div class="container">
+            <div class="banner__section">
+                <div class="banner__content">
+                    <h1>Start your tech <span>journey with us</span></h1>
+                    <p>Farjax Tech & Consulting Inc is an IT consulting company headquartered
+                        in New York, USA, providing services like , Business Consulting ,
+                        Application Development & Management , Talent Acquisitions, Job
+                        Placement and training.</p>
+                    {{-- <button class="applyBtn">Apply Now</button> --}}
+                    <a href="#contact" class="applybutton applyBtn">Apply Now</a>
+                </div>
             </div>
+
         </div>
 
-    </div>
-
-</section>
-
+    </section>
+ 
     <!-- bootcamp section start here -->
     <section class="bootcamp__section section__gap" id="service">
         <div class="container">

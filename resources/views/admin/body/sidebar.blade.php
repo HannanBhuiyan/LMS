@@ -140,11 +140,16 @@
                         </ul>
                     </li>
 
-
                     <li class="slide">
                         <a class="side-menu__item has-link {{ request()->routeIs('site_logo.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('site_logo.index') }}"><i
                                 class="side-menu__icon fe fe-mail"></i><span
                                 class="side-menu__label">Site logo</span></a>
+                    </li>
+
+                    <li class="slide">
+                        <a class="side-menu__item has-link {{ request()->routeIs('program_overview.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('program_overview.index') }}"><i
+                                class="side-menu__icon fe fe-mail"></i><span
+                                class="side-menu__label">Program Overview List</span></a>
                     </li>
 
                     <li class="slide">

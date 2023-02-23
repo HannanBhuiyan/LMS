@@ -626,12 +626,7 @@ input#phone{
     line-height: 24px;
     font-family: var(--p--poppins);
 }
-
-.overview__section{
-    background-image: url(../image/section/banner3.png);
-    background-repeat: no-repeat;
-    background-position: right;
-}
+ 
 
 .overview__inner{
     font-family: var(--p--poppins);
@@ -658,27 +653,22 @@ input#phone{
     line-height: 26px;
 }
 
-.overview__box {
-    width: 100%;
-    max-width: 775px;
-}
-
 .overview {
     font-size: 14px;
     color: var(--p--primary);
     position: relative;
     height: 90px;
-    /* line-height: 90px; */
     padding: 0 30px;
     background: rgba(245, 249, 250, 1);
     border-radius: 10px;
     width: 100%;
-    max-width: 345px;
+    max-width: 492px;
     text-align: center;
     margin-bottom: 26px;
-
     display: flex;
     align-items: center;
+    margin: auto;
+    margin-bottom: 25px;
 }
 
 .overview p{

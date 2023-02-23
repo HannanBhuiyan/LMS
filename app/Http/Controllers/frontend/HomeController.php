@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Course;
 use App\Models\ProgramContent;
+use App\Models\ProgramOverview;
 use App\Models\SocialLiks;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,10 @@ class HomeController extends Controller
     public function course_show($id, $slug){
          
         $programs = ProgramContent::where('course_id', $id)->get();
+        $program_overview = ProgramOverview::where('course_id', $id)->get();
+
         $item = Course::where('slug', $slug)->first();
-        return view('course', compact('item', 'programs'));
+        return view('course', compact('item', 'programs', 'program_overview'));
     }
 
     public function store(Request $request)

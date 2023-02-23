@@ -90,56 +90,44 @@
                 </div>
 
                 <div class="overview__box">
-                    <div class="preBox d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
-                        <div class="overview">
-                            <p>Portfolio Creation Assistance on Dribbble</p>
-                            <span>01</span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @forelse ($program_overview as $key => $item)
+                            <div class="preBox "> 
+                                @if ($key % 2 == 0)
+                                <div class="overview">
+                                    <p>{{ $item->overview_content }}</p>
+                                    <span>0{{ $loop->index+1 }}</span>
+                                </div>  
+                                @endif
+                            </div>
+                            @empty
+                                <h4 class="text-danger">Data not found </h4>
+                            @endforelse
                         </div>
-                        <div class="overview">
-                            <p>Get Professionally certified with a UMass Amherst Certificate</p>
-                            <span>02</span>
-                        </div>
-                    </div>
-                    <div class="preBox d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
-                        <div class="overview">
-                            <p>Become a member of the University of Massachusetts - Amherst Alumni Association</p>
-                            <span>03</span>
-                        </div>
-                        <div class="overview">
-                            <p>Industry-oriented problem solving via Capstone Projects on Ecommerce, Fitness, Technology Industry</p>
-                            <span>04</span>
-                        </div>
-                    </div>
-                    <div class="preBox d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
-                        <div class="overview">
-                            <p>Hands on learning with Designer Toolkit (Figma, Invision & Balsamiq & sketch)for enhanced learning experience.</p>
-                            <span>05</span>
-                        </div>
-                        <div class="overview">
-                            <p>ands on Practical Learning experience via curriculum-wide assignments & projects</p>
-                            <span>06</span>
-                        </div>
-                    </div>
-                    <div class="preBox d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
-                        <div class="overview">
-                            <p>8x higher engagement in live online classes by Simpillearn’s Expert Instructors</p>
-                            <span>07</span>
-                        </div>
-                        <div class="overview">
-                            <p>Live Classes entirely delivered by Simplileran’s Expert Instructors.</p>
-                            <span>08</span>
+                        <div class="col-md-6">
+                            @forelse ($program_overview as $key => $item)
+                            <div class="preBox "> 
+                                @if ($key % 2 !== 0)
+                                <div class="overview">
+                                    <p>{{ $item->overview_content }}</p>
+                                    <span>
+                                        @if ($loop->index+1 >= 10)
+                                            {{ $loop->index+1 }}
+                                        @else
+                                            0{{ $loop->index+1 }}
+                                        @endif
+                                    </span>
+                                </div>  
+                                @endif
+                            </div>
+                            @empty
+                                <h4 class="text-danger">Data not found </h4>
+                            @endforelse
                         </div>
                     </div>
-                    <div class="preBox d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
-                        <div class="overview">
-                            <p>Simplilearn Career Service helps you get Noticed by top hiring companies</p>
-                            <span>09</span>
-                        </div>
-                        <div class="overview">
-                            <p>Live Masterclasses delivered by Top Design Experts From Microsoft</p>
-                            <span>10</span>
-                        </div>
-                    </div>
+                    
+                    
                 </div>
             </div>
         </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\ProgramOverview;
 use Illuminate\Http\Request;
 
 class ProgramOverviewController extends Controller
@@ -14,7 +16,8 @@ class ProgramOverviewController extends Controller
      */
     public function index()
     {
-        //
+        $program_overview = ProgramOverview::all();
+        return view('admin.program-overview.index', compact('program_overview'));
     }
 
     /**
@@ -24,7 +27,8 @@ class ProgramOverviewController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::all();
+        return view('admin.program-overview.create', compact('courses'));
     }
 
     /**
@@ -35,7 +39,19 @@ class ProgramOverviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            '*' => 'required'
+        ],[
+            'overview_content.required' => 'Overview content is required !'
+        ]);
+
+
+        $data = new ProgramOverview();
+        $data->course_id = $request->course_id;
+        $data->overview_content = $request->overview_content;
+        $data->save();
+        return redirect()->back()->with('success', 'Content added success');
+
     }
 
     /**
@@ -57,7 +73,8 @@ class ProgramOverviewController extends Controller
      */
     public function edit($id)
     {
-        //
+        $programoverview = ProgramOverview::findOrFail($id);
+        return view('admin.program-overview.edit', compact('programoverview'));
     }
 
     /**
@@ -69,17 +86,23 @@ class ProgramOverviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            '*' => 'required'
+        ],[
+            'overview_content.required' => 'Overview content is required !'
+        ]);
+
+
+        $data = ProgramOverview::findOrFail($id);
+        $data->overview_content = $request->overview_content;
+        $data->save();
+        return redirect()->back()->with('success', 'Content update success');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    
+    public function delete($id)
     {
-        //
+        ProgramOverview::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Delete successfully');
     }
 }

@@ -102,8 +102,8 @@ class SiteLogoController extends Controller
 
         if($request->file('site_logo'))
         {
-            if(file_exists($site_logo->thumbnail)){
-                unlink($site_logo->thumbnail);
+            if(file_exists($site_logo->site_logo)){
+                unlink($site_logo->site_logo);
             }
             $image = $request->file('site_logo');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();

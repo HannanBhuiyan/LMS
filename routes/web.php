@@ -12,9 +12,13 @@ use App\Http\Controllers\backend\{
     SiteLogoController,
     StudentController,
     StudentDasdhboardController,
-    SocialController
+    SocialController,
+    ProgramController,
+    ProgramOverviewController
+     
 };
 use App\Http\Controllers\frontend\HomeController;
+ 
 use Illuminate\Support\Facades\Artisan;
 
 
@@ -29,7 +33,7 @@ Route::get('/clear-cache', function(){
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('course/{slug}', [HomeController::class, 'course_show'])->name('home.course');
+Route::get('course/{id?}/{slug?}/', [HomeController::class, 'course_show'])->name('home.course');
 
 
 //Contact Form Route
@@ -93,6 +97,14 @@ Route::middleware('auth:admin')->group(function(){
     // site logo
     Route::resource('site_logo', SiteLogoController::class);
     Route::get('site/logo/{id}', [SiteLogoController::class, 'delete'])->name('site_logo.delete');
+
+    // program
+    Route::resource('programs', ProgramController::class);
+    Route::get('program/delete/{id}', [ProgramController::class, 'delete'])->name('programs.delete');
+
+    // program overview
+    Route::resource('program_overview', ProgramOverviewController::class);
+    Route::get('program_overview/delete/{id}', [ProgramOverviewController::class, 'delete'])->name('program_overview.delete');
 
 });
 

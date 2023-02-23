@@ -57,29 +57,17 @@
                     <h3 class="text-center">Why Join <span>this Program</span></h3>
                 </div>
                 <div class="program__boxes d-flex justify-content-center justify-content-lg-between flex-wrap flex-xl-nowrap">
-                    <div class="program__box m-4 m-lg-0">
-                        <img src="{{ asset('frontend/assets/image/icon/program1.png') }}" alt="icon">
-                        <h4>Dribbble Portfolio Creation</h4>
-                        <p>Capstone on Ecommerce , Fitness , Technology; course projects to help get a design job.</p>
-                    </div>
-                    <div class="program__box m-4 m-lg-0">
-                        <img src="{{ asset('frontend/assets/image/icon/program2.png') }}" alt="icon">
-                        <h4>Job Assistance</h4>
-                        <p>Extended Support to lend a
-                            job. resume assistance,
-                            career mentor & premium
-                            job portal access. </p>
-                    </div>
-                    <div class="program__box m-4 m-lg-0">
-                        <img src="{{ asset('frontend/assets/image/icon/program3.png') }}" alt="icon">
-                        <h4>Designer Toolkit</h4>
-                        <p>Capstone on Ecommerce , Fitness , Technology; course projects to help get a design job.</p>
-                    </div>
-                    <div class="program__box m-4 m-lg-0">
-                        <img src="{{ asset('frontend/assets/image/icon/program4.png') }}" alt="icon">
-                        <h4>Designer Toolkit</h4>
-                        <p>Extended Support to lend a job. Resume assistance, career mentor & premium job portal access. </p>
-                    </div>
+                    @forelse ($programs as $program)
+                        <div class="program__box m-4 m-lg-0">
+                            <img src="{{ asset($program->image) }}" alt="icon">
+                            <h4>{{ $program->title }}</h4>
+                            <p>{{ $program->description }}</p>
+                        </div>
+                    @empty
+                        <div class="notfound" style="text-align:center !important; width:100%">
+                            <h4 style="color:red; font-weight:700">Data not found !!!</h2>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>

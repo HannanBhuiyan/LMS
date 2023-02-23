@@ -18,15 +18,19 @@
 </head>
 <body>
 
+   
     @include('layouts.frontend.body.header')
 
     @yield('content')
 
     @include('layouts.frontend.body.footer')
 
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/intlTelInput.js'></script>
     <script src="{{ asset('frontend/assets/js/script.js') }}"></script>
+
+ 
 </body>
 </html>

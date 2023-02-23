@@ -23,10 +23,10 @@
     <section class="bootcamp__section section__gap" id="service">
         <div class="container">
             <div class="bootcamp__inner">
-                <div class="row">
+                <div class="row"> 
                     @forelse ($courses as $course)
                     <div class="col-sm-6 col-md-4">
-                        <a href="{{ route('home.course', $course->slug) }}">
+                        <a href="{{ route('home.course', ['id'=>$course->id, 'slug'=>$course->slug]) }}">
                             <div class="bootcamp mx-auto" style="background-image: url('{{ asset($course->thumbnail) }}');">
                                 <div class="bootContent">
                                     <h4>{{ $course->course_name}}</h4>

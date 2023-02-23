@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Course;
+use App\Models\ProgramContent;
 use App\Models\SocialLiks;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,11 @@ class HomeController extends Controller
         return view('home', compact('courses'));
     }
 
-    public function course_show($slug){
+    public function course_show($id, $slug){
+         
+        $programs = ProgramContent::where('course_id', $id)->get();
         $item = Course::where('slug', $slug)->first();
-        return view('course', compact('item'));
+        return view('course', compact('item', 'programs'));
     }
 
     public function store(Request $request)

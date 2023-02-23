@@ -122,6 +122,24 @@
                           
                         </ul>
                     </li>
+ 
+                    <li class="slide {{ request()->routeIs('programs*') ? 'is-expanded' : '' }}">
+                        <a class="side-menu__item {{ request()->routeIs('programs*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
+                                class="side-menu__icon fe fe-user-check"></i><span
+                                class="side-menu__label">Program Content</span><i
+                                class="angle fe fe-chevron-right"></i></a>
+                        <ul class="slide-menu"> 
+                            <li>
+                                <a href="{{ route('programs.index') }}" class="slide-item {{ request()->routeIs('programs.index') ? 'active' : '' }}">   Program List</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('programs.create') }}" class="slide-item {{ request()->routeIs('programs.create') ? 'active' : '' }}">   Add Program Conent</a>
+                            </li>
+                          
+                        </ul>
+                    </li>
+
 
                     <li class="slide">
                         <a class="side-menu__item has-link {{ request()->routeIs('site_logo.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('site_logo.index') }}"><i

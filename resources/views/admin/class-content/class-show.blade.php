@@ -90,6 +90,18 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <th>Batch Name</th>
+                                                    <td>
+                                                        {{ $items->batch->batch_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Chapter Name</th>
+                                                    <td>
+                                                        {{ $items->chapter->chapter_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
                                                     <th>Video URL</th>
                                                     <td>  {{ $items->class_video }} </td>
                                                 </tr>

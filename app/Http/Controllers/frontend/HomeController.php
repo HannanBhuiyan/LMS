@@ -23,7 +23,6 @@ class HomeController extends Controller
          
         $programs = ProgramContent::where('course_id', $id)->get();
         $program_overview = ProgramOverview::where('course_id', $id)->get();
-
         $item = Course::where('slug', $slug)->first();
         return view('course', compact('item', 'programs', 'program_overview'));
     }

@@ -31,8 +31,14 @@ class StudentDasdhboardController extends Controller
 
         // $user_id = Auth::user()->id;
         $courses_id = assigncourse::findOrFail($id)->course_id;
+       
         $single_course_info = Course::where('id', $courses_id)->first();
-        $courses = Class_content::where('course_id', $courses_id)->get();
-        return view('admin.student.student-course-show',  compact('courses', 'single_course_info'));
+
+        $class_content = Class_content::where('course_id', $courses_id)->get();
+         
+
+        return view('admin.student.student-course-show',  compact('class_content', 'single_course_info'));
+
+
     }
 }

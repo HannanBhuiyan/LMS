@@ -8,12 +8,14 @@
                         <h2>Follow Us</h2> 
                         <div class="social"> 
                             <ul class=" d-flex justify-content-between flex-wrap">
-                                <li><a href="{{ social_links()->facebook }}"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="{{ social_links()->twitter }}"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li class="m-0"><a href="{{ social_links()->youtube }}"><i class="fa-brands fa-youtube"></i></a></li>
-                                <li class=""><a href="{{ social_links()->linkedin }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                <li class=""><a href="{{ social_links()->instragram }}"><i class="fa-brands fa-instagram"></i></a></li>
-                                <a href="{{ social_links()->telegram }}"><img src="{{ asset('frontend/assets/image/icon/telegram.png') }}" alt="icon"></a>
+                                @if (social_links_count() > 0)
+                                    <li><a href="{{ social_links()->facebook }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                    <li><a href="{{ social_links()->twitter }}"><i class="fa-brands fa-twitter"></i></a></li>
+                                    <li class="m-0"><a href="{{ social_links()->youtube }}"><i class="fa-brands fa-youtube"></i></a></li>
+                                    <li class=""><a href="{{ social_links()->linkedin }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                    <li class=""><a href="{{ social_links()->instragram }}"><i class="fa-brands fa-instagram"></i></a></li>
+                                    <a href="{{ social_links()->telegram }}"><img src="{{ asset('frontend/assets/image/icon/telegram.png') }}" alt="icon"></a>
+                                @endif
                             </ul>
                             <button class="applyBtn" style="background: #333; border: none; font-weight: 400; color: #C0C0C0;">Refer and earn</button>
                         </div>

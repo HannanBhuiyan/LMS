@@ -51,7 +51,7 @@
 
                             </td>
                             <td>{{ $items->start_date }}</td>
-                            <td>{{ $items->course_short_des }}</td>
+                            <td>{!! Str::limit($items->course_short_des, 30, '...') !!}</td>
                             {{-- <td>{!! substr($items->course_desceiption,0,200 )!!}</td> --}}
                             <td>
                                 <img width="100px" height="100px" src="{{ (!empty($items->thumbnail)) ? asset($items->thumbnail) : asset('backend/assets/uploads/default.jpg') }}" alt="image">

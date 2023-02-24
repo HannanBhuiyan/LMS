@@ -100,31 +100,59 @@
                     <div class="main-container container-fluid">
                         <div class="row mt-5">
                             <div class="col-md-7">
-                                <div class="card p-3">
-                                    @foreach ($courses as $course)
-                                        <div id="class{{ $course->id}}" class="tabcontent">
-                                            <iframe width="100%" height="450" src="{{ $course->class_video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                            <div class="card p-3 mt-4">
-                                                <p>{!! $course->class_text !!}</p>
-                                            </div>
-                                        </div>
+                                <div class="card p-3"> 
 
-                                    @endforeach
+                                    @foreach ($class_content as $item)
+                                    <li> 
+                                        @php
+                                            $chapter_wise_class = App\Models\Class_content::where('chapter_id',$item->chapter->id)->get();
+                                        @endphp
+                                        @foreach ($chapter_wise_class as $chapter_wise_item) 
+                                        @php
+                                            $x = 1;
+                                        @endphp
+                                            @foreach (json_decode($chapter_wise_item->class_video) as $class_ll) 
 
+                                            <div id="{{ $item->chapter->chapter_name }}{{ $x++ }}" class="tabcontent">
+                                                <iframe width="100%" height="450" src="{{ $class_ll }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                <div class="card p-3 mt-4">
+                                                    <p>sadfsa</p>
+                                                </div>
+                                            </div> 
+                                            @endforeach
+                                        @endforeach
+                                    </li>
+                                @endforeach 
+ 
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5"> 
                                 <div class="card p-4">
                                   <p class="course_single_title"> {{ $single_course_info->course_name }}</p>
-                                  <div class="tab">
-                                       <ul class="class_list">
-                                        @foreach ($courses as $course)
+ 
+
+                                   @foreach ($class_content as $item)
                                         <li>
-                                            <button class="tablinks" onclick="openCity(event, 'class{{ $course->id }}')" id="defaultOpen">Class {{ $loop->index+1 }}</button>
+                                            {{ $item->chapter->chapter_name }}
+                                            @php
+                                                $chapter_wise_class = App\Models\Class_content::where('chapter_id',$item->chapter->id)->get();
+                                            @endphp
+                                            @foreach ($chapter_wise_class as $chapter_wise_item) 
+                                            @php
+                                                $x = 1;
+                                            @endphp
+                                                @foreach (json_decode($chapter_wise_item->class_video) as $class_ll)
+                                                <ul> 
+                                                    <li>
+                                                        <button class="tablinks" onclick="openCity(event, '{{ $item->chapter->chapter_name }}{{ $x++ }}')" id="defaultOpen">Class {{ $loop->index+1 }}</button>
+                                                    </li>
+                                                </ul>
+                                                @endforeach
+                                            @endforeach
                                         </li>
-                                        @endforeach
-                                       </ul>
-                                    </div>
+                                    @endforeach 
+                                    
+   
                                 </div>
                             </div>
                         </div>
@@ -155,11 +183,7 @@
 <script src="{{ asset('backend') }}/assets/plugins/bootstrap/js/popper.min.js"></script>
 <script src="{{ asset('backend') }}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-{{-- <!-- SIDE-MENU JS-->
-<script src="{{ asset('backend') }}/assets/plugins/sidemenu/sidemenu.js"></script>
-
-<!-- SIDEBAR JS -->
-<script src="{{ asset('backend') }}/assets/plugins/sidebar/sidebar.js"></script> --}}
+ 
 
 <!-- CUSTOM JS -->
 <script src="{{ asset('backend') }}/assets/js/custom.js"></script>

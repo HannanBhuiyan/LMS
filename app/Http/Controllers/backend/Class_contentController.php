@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Batch;
+use App\Models\Blog;
+use App\Models\Chapter;
 use App\Models\Class_content;
 use App\Models\Course;
 use Illuminate\Http\Request;
@@ -16,8 +19,8 @@ class Class_contentController extends Controller
      */
     public function index()
     {
-        $class = Class_content::all();
-        return view('admin.class-content.class-index', compact('class'));
+        $class_conent = Class_content::all();
+        return view('admin.class-content.class-index', compact('class_conent'));
     }
 
     /**
@@ -28,7 +31,9 @@ class Class_contentController extends Controller
     public function create()
     {
         $course = Course::latest()->get();
-        return view('admin.class-content.class-add', compact('course'));
+        $blog = Blog::latest()->get();
+        $chapter = Chapter::latest()->get();
+        return view('admin.class-content.class-add', compact('course','blog','chapter'));
     }
 
     /**
@@ -40,17 +45,21 @@ class Class_contentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'course_id' => 'required'
+            'course_id' => 'required',
+            'blog_id' => 'required',
+            'chapter_id' => 'required'
         ],[
             'course_id.required' => 'The course field is required',
+            'blog_id.required' => 'The batch field is required',
+            'chapter_id.required' => 'The chapter field is required'
         ]);
 
         $class = new Class_content;
         $class->course_id = $request->course_id;
-        $class->class_video = $request->class_video;
-        $class->class_text = $request->class_text;
+        $class->blog_id = $request->blog_id;
+        $class->chapter_id = $request->chapter_id;
+        $class->class_video = json_encode($request->class_video);
         $class->save();
-
         return redirect()->route('class-content.index')->with('success', 'Class create successfully');
     }
 
@@ -64,7 +73,9 @@ class Class_contentController extends Controller
     {
         $items = Class_content::findOrFail($id);
         $course = Course::latest()->get();
-        return view('admin.class-content.class-show', compact('items', 'course'));
+        $batch = Blog::latest()->get();
+        $chapter = Chapter::latest()->get();
+        return view('admin.class-content.class-show', compact('items', 'course','blog','chapter'));
     }
 
     /**
@@ -75,9 +86,11 @@ class Class_contentController extends Controller
      */
     public function edit($id)
     {
-        $class = Class_content::findOrFail($id);
+        $class_content = Class_content::findOrFail($id);
         $course = Course::latest()->get();
-        return view('admin.class-content.class-edit', compact('class', 'course'));
+        $blog = Blog::latest()->get();
+        $chapter = Chapter::latest()->get();
+        return view('admin.class-content.class-edit', compact('class_content', 'course','blog','chapter'));
     }
 
     /**
@@ -90,15 +103,20 @@ class Class_contentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'course_id' => 'required'
+            'course_id' => 'required',
+            'blog_id' => 'required',
+            'chapter_id' => 'required'
         ],[
             'course_id.required' => 'The course field is required',
+            'blog_id.required' => 'The batch field is required',
+            'chapter_id.required' => 'The chapter field is required'
         ]);
 
         $class = Class_content::findOrFail($id);
         $class->course_id = $request->course_id;
+        $class->blog_id = $request->blog_id;
+        $class->chapter_id = $request->chapter_id;
         $class->class_video = $request->class_video;
-        $class->class_text = $request->class_text;
         $class->save();
 
         return redirect()->route('class-content.index')->with('success', 'Class update successfully');

@@ -87,18 +87,20 @@
                                               <tr>
                                                 <th scope="col">SL No</th>
                                                 <th scope="col">Course Name</th>
-                                                <th scope="col">Video URl</th>
-                                                <th scope="col">Class Content</th>
+                                                <th scope="col">Blog Name</th>
+                                                <th scope="col">Chapter Name</th>
+                                                <th scope="col">Video URl</th> 
                                                 <th scope="col">Action</th>
                                               </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($class as $items)
+                                                @foreach ($class_conent as $items)
                                                 <tr>
                                                     <td>{{ $loop->index+1 }}</td>
                                                     <td>{{ $items->course->course_name }}</td>
-                                                    <td>{{ $items->class_video }}</td>
-                                                    <td>{!! substr($items->class_text, 0, 100) !!}</td>
+                                                    <td>{{ Str::headline($items->relationWithblog->blog_title) }}</td>
+                                                    <td>{{ $items->chapter->chapter_name }}</td>
+                                                    <td>{{ $items->class_video }}</td> 
                                                     <td>
                                                         <a href="{{ route('class-content.edit', $items->id) }}" class="btn btn-success">Edit</a>
                                                         <a href="{{ route('class-content.show', $items->id) }}" class="btn btn-secondary">Show</a>

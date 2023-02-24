@@ -8,9 +8,13 @@ use App\Models\SocialLiks;
 
 
 function social_links(){
-    $social_links = SocialLiks::first();
-    return $social_links;
+    return SocialLiks::first();
 }
+
+function social_links_count(){
+    return SocialLiks::latest()->get()->count();
+}
+
 
 function getFiveCourse()
 {
@@ -21,6 +25,10 @@ function getFiveCourse()
 function getsitelogo(){
     $logo = SiteLogo::first();
     return $logo;
+}
+
+function logoCount(){
+    return SiteLogo::latest()->get()->count(); 
 }
 
 // function slugWiseProgramContent() 

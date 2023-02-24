@@ -14,7 +14,7 @@
             <div class="category_title my-3">
                 <h3>Update Class</h3>
             </div>
-            <form action="{{ route('class-content.update', $class->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('class-content.update', $class_content->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -22,7 +22,7 @@
                     <select name="course_id" class="form-control form-select select2" data-bs-placeholder="Select">
                         <option selected="" disabled="">Select Course</option>
                         @foreach($course as $item )
-                            <option value="{{ $item->id }}" {{ $item->id == $class->course_id ? 'selected': ''}}>{{ $item->course_name }}</option>
+                            <option value="{{ $item->id }}" {{ $item->id == $class_content->course_id ? 'selected': ''}}>{{ $item->course_name }}</option>
                         @endforeach
                     </select>
                     @error('course_id')
@@ -31,14 +31,36 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Video URL</label>
-                    <input type="url" class="form-control" name="class_video" value="{{ $class->class_video }}">
+                    <label class="form-label">Batch Name<span class="text-danger">*</span></label>
+                    <select name="blog_id" class="form-control form-select select2" data-bs-placeholder="Select">
+                        <option selected="" disabled="">Select Batch</option>
+                        @foreach($blog as $item )
+                            <option value="{{ $item->id }}" {{ $item->id == $class_content->blog_id ? 'selected': ''}}>{{ $item->blog_title }}</option>
+                        @endforeach
+                    </select>
+                    @error('blog_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Text</label>
-                    <textarea class="form-control" id="summernote" name="class_text">{!! $class->class_text !!}</textarea>
+                    <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
+                    <select name="chapter_id" class="form-control form-select select2" data-bs-placeholder="Select">
+                        <option selected="" disabled="">Select Chapter</option>
+                        @foreach($chapter as $item )
+                            <option value="{{ $item->id }}" {{ $item->id == $class_content->chapter_id ? 'selected': ''}}>{{ $item->chapter_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('chapter_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
+
+                <div class="form-group">
+                    <label class="form-label">Video URL</label>
+                    <input type="url" class="form-control" name="class_video" value="{{ $class_content->class_video }}">
+                </div>
+ 
 
                 <div class="form-group">
                     <input class="btn btn-secondary btn-pill" type="submit" value="Update class">

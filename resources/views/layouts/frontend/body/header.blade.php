@@ -5,11 +5,13 @@
     <div class="container">
         <div class="heading d-flex justify-content-between align-items-center">
             <div class="logo">
+               @if (logoCount() > 0)
                 <a href="{{ route('home') }}"><img src="{{ asset(getsitelogo()->site_logo) }}" alt="logo"></a>
+               @endif
             </div>
             <div class="menu d-none d-lg-block">
                 <ul class=" d-flex align-items-center">
-                    <li><a href="#service">Course</a></li>
+                    <li><a href="#service">Course </a></li>
                     <li><a href="#service">Service</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a class="login" href="{{ route('login') }}">Log In</a></li>

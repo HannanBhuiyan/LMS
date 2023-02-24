@@ -14,7 +14,9 @@ use App\Http\Controllers\backend\{
     StudentDasdhboardController,
     SocialController,
     ProgramController,
-    ProgramOverviewController
+    ProgramOverviewController,
+    ChapterController,
+    BlogController
      
 };
 use App\Http\Controllers\frontend\HomeController;
@@ -105,6 +107,18 @@ Route::middleware('auth:admin')->group(function(){
     // program overview
     Route::resource('program_overview', ProgramOverviewController::class);
     Route::get('program_overview/delete/{id}', [ProgramOverviewController::class, 'delete'])->name('program_overview.delete');
+
+
+    // chapter
+    Route::resource('chapter', ChapterController::class);
+    Route::get('chapter/delete/{id}', [ChapterController::class, 'delete'])->name('chapter.delete');
+
+
+    // blog
+    Route::resource('blog', BlogController::class);
+    Route::get('blog/delete/{id}', [BlogController::class, 'delete'])->name('blog.delete');
+
+
 
 });
 

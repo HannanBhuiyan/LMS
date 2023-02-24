@@ -86,6 +86,7 @@
 
 <!-- JQUERY JS -->
 <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
+ 
 
 <!-- BOOTSTRAP JS -->
 <script src="{{ asset('backend') }}/assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -239,6 +240,8 @@
 <!-- Sticky js -->
 <script src="{{ asset('backend') }}/assets/js/sticky.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
 <!-- Switcher js -->
 <script src="{{ asset('backend') }}/assets/switcher/js/switcher.js"></script>

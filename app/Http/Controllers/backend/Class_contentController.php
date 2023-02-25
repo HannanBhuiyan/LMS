@@ -54,11 +54,22 @@ class Class_contentController extends Controller
             'chapter_id.required' => 'The chapter field is required'
         ]);
 
-        $class = new Class_content;
-        $class->course_id = $request->course_id;
-        $class->blog_id = $request->blog_id;
-        $class->chapter_id = $request->chapter_id;
-        $class->class_video = json_encode($request->class_video);
+         $exist = Class_content::where('course_id', $request->course_id)->where('chapter_id', $request->chapter_id)->exists();
+
+         if($exist){
+                return back()->with('fail', 'chapter alresdy exists in this course');
+            }else{
+                $class = new Class_content;
+                $class->course_id = $request->course_id;
+                $class->blog_id = $request->blog_id;
+                $class->chapter_id = $request->chapter_id;
+                if($request->class_video){
+                    $class->class_video = json_encode($request->class_video);
+                }
+            }
+         
+
+        
         $class->save();
         return redirect()->route('class-content.index')->with('success', 'Class create successfully');
     }
@@ -73,7 +84,7 @@ class Class_contentController extends Controller
     {
         $items = Class_content::findOrFail($id);
         $course = Course::latest()->get();
-        $batch = Blog::latest()->get();
+        $blog = Blog::latest()->get();
         $chapter = Chapter::latest()->get();
         return view('admin.class-content.class-show', compact('items', 'course','blog','chapter'));
     }
@@ -102,6 +113,7 @@ class Class_contentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request;
         $request->validate([
             'course_id' => 'required',
             'blog_id' => 'required',
@@ -112,11 +124,20 @@ class Class_contentController extends Controller
             'chapter_id.required' => 'The chapter field is required'
         ]);
 
-        $class = Class_content::findOrFail($id);
-        $class->course_id = $request->course_id;
-        $class->blog_id = $request->blog_id;
-        $class->chapter_id = $request->chapter_id;
-        $class->class_video = $request->class_video;
+        $exist = Class_content::where('course_id', $request->course_id)->where('chapter_id', $request->chapter_id)->exists();
+
+        if($exist){
+            return back()->with('fail', 'chapter alresdy exists in this course');
+        }else{
+            $class = Class_content::findOrFail($id);
+            $class->course_id = $request->course_id;
+            $class->blog_id = $request->blog_id;
+            $class->chapter_id = $request->chapter_id;
+            if($request->class_video){
+                $class->class_video = json_encode($request->class_video);
+            }
+        }
+        
         $class->save();
 
         return redirect()->route('class-content.index')->with('success', 'Class update successfully');

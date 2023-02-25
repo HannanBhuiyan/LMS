@@ -102,10 +102,10 @@
                             <div class="col-md-7">
                                 <div class="card p-3"> 
 
-                                    @foreach ($class_content as $item)
-                                    <li> 
+                                @foreach ($class_content as $item)
+                                    <ul> 
                                         @php
-                                            $chapter_wise_class = App\Models\Class_content::where('chapter_id',$item->chapter->id)->get();
+                                            $chapter_wise_class = App\Models\Class_content::where('chapter_id',$item->chapter_id)->get();
                                         @endphp
                                         @foreach ($chapter_wise_class as $chapter_wise_item) 
                                         @php
@@ -116,12 +116,13 @@
                                             <div id="{{ $item->chapter->chapter_name }}{{ $x++ }}" class="tabcontent">
                                                 <iframe width="100%" height="450" src="{{ $class_ll }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                                 <div class="card p-3 mt-4">
-                                                    <p>sadfsa</p>
+                                                    <h3>{{$chapter_wise_item->relationWithblog->blog_title}}</h3>
+                                                    <p>{!!$chapter_wise_item->relationWithblog->blog_content!!}</p>
                                                 </div>
                                             </div> 
                                             @endforeach
                                         @endforeach
-                                    </li>
+                                        </ul>
                                 @endforeach 
  
                                 </div>
@@ -129,11 +130,10 @@
                             <div class="col-md-5"> 
                                 <div class="card p-4">
                                   <p class="course_single_title"> {{ $single_course_info->course_name }}</p>
- 
 
                                    @foreach ($class_content as $item)
-                                        <li>
-                                            {{ $item->chapter->chapter_name }}
+                                        <ul>
+                                            <h3>{{ $item->chapter->chapter_name }}</h3>
                                             @php
                                                 $chapter_wise_class = App\Models\Class_content::where('chapter_id',$item->chapter->id)->get();
                                             @endphp
@@ -149,7 +149,30 @@
                                                 </ul>
                                                 @endforeach
                                             @endforeach
-                                        </li>
+                                            </ul>
+
+                                            {{-- <div class="accordion" id="accordionExample{{$item->id}}">
+                                                <div class="accordion-item">
+                                                  <h2 class="accordion-header" id="headingOne{{$item->id}}">
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$item->id}}" aria-expanded="true" aria-controls="collapseOne">
+                                                        {{ $item->chapter->chapter_name }}
+                                                    </button>
+                                                  </h2>
+                                                @foreach ($chapter_wise_class as $chapter_wise_item) 
+                                                @php
+                                                    $x = 1;
+                                                @endphp
+                                                    @foreach (json_decode($chapter_wise_item->class_video) as $class_ll)
+                                                        <div id="collapseOne{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne{{$item->id}}" data-bs-parent="#accordionExample{{$item->id}}">
+                                                            <div class="accordion-body">
+                                                                <button class="tablinks" onclick="openCity(event, '{{ $item->chapter->chapter_name }}{{ $x++ }}')" id="defaultOpen">Class {{ $loop->index+1 }}</button>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endforeach
+                                                </div>
+                                                
+                                            </div> --}}
                                     @endforeach 
                                     
    

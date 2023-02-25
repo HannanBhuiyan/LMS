@@ -90,9 +90,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Batch Name</th>
+                                                    <th>Blog</th>
                                                     <td>
-                                                        {{ $items->batch->batch_name }}
+                                                        <b>{{ $items->relationWithblog->blog_title ?? ''}}</b>
+                                                        <p>{!! $items->relationWithblog->blog_content ?? ''!!}</p>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -103,7 +104,16 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Video URL</th>
-                                                    <td>  {{ $items->class_video }} </td>
+                                                    <td>  
+                                                        <div class="row">
+                                                            @if (json_decode($items->class_video))
+                                                            @foreach (json_decode($items->class_video) as $vdo)
+                                                            <ul><a href="{{$vdo}}">{{$vdo}}</a></ul>
+                                                    
+                                                            @endforeach  
+                                                        @endif
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Class Content</th>

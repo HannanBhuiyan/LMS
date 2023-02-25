@@ -182,6 +182,12 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Course Active Successfully');
     }
 
+    public function courseVideoDelete($id) {
+        return back();
+        // QuestionOption::findOrFail($id)->delete();
+        // return response(['success' => 'data delete success']);
+    }
+
 
 
 }

@@ -53,13 +53,8 @@
                     @enderror
                 </div>
 
-                {{-- <div class="form-group">
-                    <label class="form-label">Video URL</label>
-                    <input type="url" class="form-control" name="class_video" placeholder="URL">
-                </div>  --}}
-
                 <div class="form-group">
-                    <label> Class Video Link <span class="text-danger">*</span></label>
+                    <label> Class Video Link </label>
                     <div class="row new_properties mb-1">
                         <div class="col-10">
                             <input type="text" class="form-control" name="class_video[]" placeholder="Http://...">

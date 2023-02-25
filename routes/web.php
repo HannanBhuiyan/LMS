@@ -62,6 +62,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::get('courses/delete/{id}', [CourseController::class, 'destroy'])->name('courses.delete');
     Route::get('courses/inactive/{id}', [CourseController::class, 'inactive'])->name('course.inactive');
     Route::get('courses/active/{id}', [CourseController::class, 'active'])->name('course.active');
+    Route::get('/courseVideo/delete/{id}', [CourseController::class, 'courseVideoDelete']);
 
     //Student Route
     Route::resource('student', StudentController::class);

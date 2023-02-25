@@ -100,7 +100,13 @@
                                                     <td>{{ $items->course->course_name }}</td>
                                                     <td>{{ Str::headline($items->relationWithblog->blog_title) }}</td>
                                                     <td>{{ $items->chapter->chapter_name }}</td>
-                                                    <td>{{ $items->class_video }}</td> 
+                                                    <td>
+                                                        @if (json_decode($items->class_video))
+                                                            @foreach (json_decode($items->class_video) as $vdo)
+                                                                <ul><a href="{{$vdo}}" target="_blank">{{$vdo}}</a></ul>
+                                                            @endforeach    
+                                                        @endif
+                                                    </td> 
                                                     <td>
                                                         <a href="{{ route('class-content.edit', $items->id) }}" class="btn btn-success">Edit</a>
                                                         <a href="{{ route('class-content.show', $items->id) }}" class="btn btn-secondary">Show</a>

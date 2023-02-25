@@ -58,7 +58,22 @@
 
                 <div class="form-group">
                     <label class="form-label">Video URL</label>
-                    <input type="url" class="form-control" name="class_video" value="{{ $class_content->class_video }}">
+                    @if (json_decode($class_content->class_video))
+                        @foreach (json_decode($class_content->class_video) as $vdo)
+                        <div class="row new_properties">
+                            <div class="col-10">
+                                <input type="text" class="form-control mb-1 delete_option" value="{{$vdo}}" name="class_video[]" placeholder="Http://...">
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="close remove--new_properties">
+                                    <span class="option_delete" data-id="{{ $item->id }}" >&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        @endforeach
+                    @endif
+                    <div class="properties-container"></div>
+                    <div class="btn btn-info mt-1" id="add_more">Add More</div>
                 </div>
  
 
@@ -69,4 +84,36 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+   });
+   $(document).ready(function () {
+     
+       $('#add_more').click(function (){
+           // alert('hi');
+           let new_properties_html =
+           `<div class="row new_properties">
+               <div class="col-10">
+                   <input type="text" name="class_video[]" class="form-control mb-1" placeholder="Http://...">
+               </div>
+               <div class="col-2">
+               <button type="button" class="close remove--new_properties">
+                   <span>&times;</span>
+               </button>
+               </div>
+           </div>`;
+           $('.properties-container').append(new_properties_html);
+       });
+       $(document).on('click', '.remove--new_properties', function(){
+           $(this).closest(".new_properties").remove();
+       });
+       
+   });
+</script>
 @endsection

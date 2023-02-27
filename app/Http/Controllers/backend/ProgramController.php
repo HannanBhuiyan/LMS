@@ -52,7 +52,7 @@ class ProgramController extends Controller
             $name_gen = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
             $location = 'backend/assets/uploads/program/';
             $final_image = $location.$name_gen;
-            Image::make($img)->save($final_image);
+            Image::make($img)->resize(50,50)->save($final_image);
         }
 
         // store program data
@@ -114,7 +114,7 @@ class ProgramController extends Controller
             $name_gen = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
             $location = 'backend/assets/uploads/program/';
             $final_image = $location.$name_gen;
-            Image::make($img)->save($final_image);
+            Image::make($img)->resize(50,50)->save($final_image);
             $program_data->image = $final_image; 
         }
 

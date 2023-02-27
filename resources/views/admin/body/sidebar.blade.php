@@ -57,7 +57,7 @@
 
                     <li class="slide {{ request()->routeIs('chapter*') ? 'is-expanded' : '' }}">
                         <a class="side-menu__item {{ request()->routeIs('chapter*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                class="side-menu__icon fe fe-layers"></i><span
+                                class="side-menu__icon fe fe-package"></i><span
                                 class="side-menu__label">Chapter</span><i
                                 class="angle fe fe-chevron-right"></i></a>
                         <ul class="slide-menu">
@@ -123,7 +123,7 @@
 
                     <li class="slide {{ request()->routeIs('blog*') ? 'is-expanded' : '' }}">
                         <a class="side-menu__item {{ request()->routeIs('blog*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                class="side-menu__icon fe fe-user-check"></i><span
+                                class="side-menu__icon fe fe-file"></i><span
                                 class="side-menu__label">Blog</span><i
                                 class="angle fe fe-chevron-right"></i></a>
                         <ul class="slide-menu">
@@ -133,27 +133,20 @@
                     </li>
 
 
-                    <li class="slide">
-                        <a class="side-menu__item has-link {{ request()->routeIs('social_links.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('contact.index') }}"><i
-                                class="side-menu__icon fe fe-mail"></i><span
-                                class="side-menu__label">Social Links</span></a>
-                    </li>
-
-
                     <li class="slide {{ request()->routeIs('social_links*') ? 'is-expanded' : '' }}">
                         <a class="side-menu__item {{ request()->routeIs('social_links*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                class="side-menu__icon fe fe-user-check"></i><span
+                                class="side-menu__icon fe fe-globe"></i><span
                                 class="side-menu__label">Social Link</span><i
                                 class="angle fe fe-chevron-right"></i></a>
                         <ul class="slide-menu"> 
                             <li><a href="{{ route('social_links.index') }}" class="slide-item {{ request()->routeIs('social_links.index') ? 'active' : '' }}"> Social Link List</a></li>
-                          
+                           
                         </ul>
                     </li>
  
                     <li class="slide {{ request()->routeIs('programs*') ? 'is-expanded' : '' }}">
                         <a class="side-menu__item {{ request()->routeIs('programs*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                class="side-menu__icon fe fe-user-check"></i><span
+                                class="side-menu__icon fe fe-file-text"></i><span
                                 class="side-menu__label">Program Content</span><i
                                 class="angle fe fe-chevron-right"></i></a>
                         <ul class="slide-menu"> 
@@ -170,13 +163,13 @@
 
                     <li class="slide">
                         <a class="side-menu__item has-link {{ request()->routeIs('site_logo.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('site_logo.index') }}"><i
-                                class="side-menu__icon fe fe-mail"></i><span
+                                class="side-menu__icon fe fe-upload"></i><span
                                 class="side-menu__label">Site logo</span></a>
                     </li>
 
                     <li class="slide">
                         <a class="side-menu__item has-link {{ request()->routeIs('program_overview.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('program_overview.index') }}"><i
-                                class="side-menu__icon fe fe-mail"></i><span
+                                class="side-menu__icon fe fe-menu"></i><span
                                 class="side-menu__label">Program Overview List</span></a>
                     </li>
 

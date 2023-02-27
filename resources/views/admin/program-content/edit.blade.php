@@ -15,7 +15,7 @@
                 @method('PUT')
                 <input type="hidden" value="{{ $program->image }}" name="old_image">
                 <div class="form-group">
-                    <label for="">Course</label>
+                    <label class="form-label" for="">Course</label>
                     <select name="course_id" class="form-control">
                         <option selected >--Select Course--</option>
                         @foreach ($courses as $course)
@@ -27,21 +27,21 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Program Title</label>
+                    <label class="form-label">Program Title</label>
                     <input type="text" name="title" value="{{ $program->title }}" placeholder="Enter Program Title" class="form-control">
                     @error('title')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Program Description</label>
+                    <label class="form-label">Program Description</label>
                     <textarea name="description" class="form-control" rows="7" placeholder="Enter Program Description">{{ $program->description }}</textarea>
                     @error('description')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Image</label>
+                    <label class="form-label">Image</label>
                     <br>
                     <img src="{{ asset($program->image) }}" width="100px" class="my-2" height="100px" alt="image">
                     <input type="file" name="image" class="form-control">

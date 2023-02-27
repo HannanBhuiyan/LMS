@@ -25,7 +25,7 @@
     @if (Auth::user()->isban == 0)
     <div class="row mt-5">
         @forelse ($assing_courses as $course)
-        <div class="col-md-3">
+        <div class="col-md-4">
             <a href="{{ route('single.course.show', $course->id ) }}">
                 <div class="card p-3">
                     <img height="350" width="100%" src="{{ $course->relationwithcourse->thumbnail }}" alt="">

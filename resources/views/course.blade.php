@@ -8,7 +8,7 @@
             <div class="landing__inner">
                 <div class="row gx-4 gx-md-5">
                     <div class="col-md-5">
-                        <img width="100%" src="{{ asset('frontend/assets/image/section/banner2.png') }}" alt="image">
+                        <img width="100%" src="{{ asset($item->thumbnail) }}" alt="image">
                     </div>
                     <div class="col-md-7">
                         <div class="landing__content">
@@ -59,7 +59,7 @@
                 <div class="program__boxes d-flex justify-content-center justify-content-lg-between flex-wrap flex-xl-nowrap">
                     @forelse ($programs as $program)
                         <div class="program__box m-4 m-lg-0">
-                            <img src="{{ asset($program->image) }}" alt="icon">
+                            <img  src="{{ asset($program->image) }}" alt="icon">
                             <h4>{{ $program->title }}</h4>
                             <p>{{ $program->description }}</p>
                         </div>

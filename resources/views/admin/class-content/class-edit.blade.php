@@ -31,9 +31,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Batch Name<span class="text-danger">*</span></label>
+                    <label class="form-label">Blog Name<span class="text-danger">*</span></label>
                     <select name="blog_id" class="form-control form-select select2" data-bs-placeholder="Select">
-                        <option selected="" disabled="">Select Batch</option>
+                        <option selected="" disabled="">Select Blog</option>
                         @foreach($blog as $item )
                             <option value="{{ $item->id }}" {{ $item->id == $class_content->blog_id ? 'selected': ''}}>{{ $item->blog_title }}</option>
                         @endforeach

@@ -100,7 +100,7 @@
                                                     <td>{{ $items->course->course_name }}</td>
                                                     <td>{{ Str::headline($items->relationWithblog->blog_title) }}</td>
                                                     <td>{{ $items->chapter->chapter_name }}</td>
-                                                    <td>
+                                                    <td> 
                                                         @if (json_decode($items->class_video))
                                                             @foreach (json_decode($items->class_video) as $vdo)
                                                                 <ul><a href="{{$vdo}}" target="_blank">{{$vdo}}</a></ul>

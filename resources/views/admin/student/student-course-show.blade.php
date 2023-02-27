@@ -63,6 +63,22 @@
             border-bottom: 1px solid #ddd;
             padding-bottom: 15px;
         }
+        .accordion-body {
+            padding: 0 !important;
+        }
+        .accordion-item {
+            margin-bottom: 15px;
+        }
+        .tablinks.active, .tablinks {
+            font-size: 15px;
+        }
+        .accordion-button {
+            font-size: 18px;
+            padding: 15px;
+        }
+        /* .accordion-item:last-of-type .accordion-collapse {
+            margin-top: 10px;
+        } */
     </style>
 
 </head>
@@ -100,82 +116,47 @@
                     <div class="main-container container-fluid">
                         <div class="row mt-5">
                             <div class="col-md-7">
-                                <div class="card p-3"> 
-
-                                @foreach ($class_content as $item)
-                                    <ul> 
-                                        @php
-                                            $chapter_wise_class = App\Models\Class_content::where('chapter_id',$item->chapter_id)->get();
-                                        @endphp
-                                        @foreach ($chapter_wise_class as $chapter_wise_item) 
-                                        @php
-                                            $x = 1;
-                                        @endphp
-                                            @foreach (json_decode($chapter_wise_item->class_video) as $class_ll) 
-
-                                            <div id="{{ $item->chapter->chapter_name }}{{ $x++ }}" class="tabcontent">
+                                <div class="card p-3">  
+                                @foreach ($class_content as $tabContent)
+                                    <ul>    
+                                        @foreach (json_decode($tabContent->class_video) as $class_ll) 
+                                            <div id="{{ $tabContent->chapter->chapter_name }}{{ $loop->index }}" class="tabcontent">
                                                 <iframe width="100%" height="450" src="{{ $class_ll }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                                 <div class="card p-3 mt-4">
-                                                    <h3>{{$chapter_wise_item->relationWithblog->blog_title}}</h3>
-                                                    <p>{!!$chapter_wise_item->relationWithblog->blog_content!!}</p>
+                                                    <h3>{{ $tabContent->relationWithblog->blog_title }}</h3>
+                                                    <p>{!!$tabContent->relationWithblog->blog_content!!}</p>
                                                 </div>
                                             </div> 
-                                            @endforeach
-                                        @endforeach
+                                        @endforeach 
                                         </ul>
                                 @endforeach 
- 
                                 </div>
                             </div>
                             <div class="col-md-5"> 
                                 <div class="card p-4">
-                                  <p class="course_single_title"> {{ $single_course_info->course_name }}</p>
-
-                                   @foreach ($class_content as $item)
-                                        <ul>
-                                            <h3>{{ $item->chapter->chapter_name }}</h3>
-                                            @php
-                                                $chapter_wise_class = App\Models\Class_content::where('chapter_id',$item->chapter->id)->get();
-                                            @endphp
-                                            @foreach ($chapter_wise_class as $chapter_wise_item) 
-                                            @php
-                                                $x = 1;
-                                            @endphp
-                                                @foreach (json_decode($chapter_wise_item->class_video) as $class_ll)
-                                                <ul> 
-                                                    <li>
-                                                        <button class="tablinks" onclick="openCity(event, '{{ $item->chapter->chapter_name }}{{ $x++ }}')" id="defaultOpen">Class {{ $loop->index+1 }}</button>
-                                                    </li>
-                                                </ul>
-                                                @endforeach
-                                            @endforeach
-                                            </ul>
-
-                                            {{-- <div class="accordion" id="accordionExample{{$item->id}}">
-                                                <div class="accordion-item">
-                                                  <h2 class="accordion-header" id="headingOne{{$item->id}}">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$item->id}}" aria-expanded="true" aria-controls="collapseOne">
-                                                        {{ $item->chapter->chapter_name }}
-                                                    </button>
-                                                  </h2>
-                                                @foreach ($chapter_wise_class as $chapter_wise_item) 
-                                                @php
-                                                    $x = 1;
-                                                @endphp
-                                                    @foreach (json_decode($chapter_wise_item->class_video) as $class_ll)
-                                                        <div id="collapseOne{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne{{$item->id}}" data-bs-parent="#accordionExample{{$item->id}}">
-                                                            <div class="accordion-body">
-                                                                <button class="tablinks" onclick="openCity(event, '{{ $item->chapter->chapter_name }}{{ $x++ }}')" id="defaultOpen">Class {{ $loop->index+1 }}</button>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                @endforeach
+                                  <p class="course_single_title"> {{ $single_course_info->course_name }}</p> 
+ 
+                                   @foreach ($class_content as $item) 
+                                    <div class="accordion" id="accordionExample{{$item->id}}">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne{{$item->id}}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$item->id}}" aria-expanded="true" aria-controls="collapseOne">
+                                                {{ $item->chapter->chapter_name }}
+                                            </button>
+                                            </h2> 
+                                            @foreach ( json_decode($item->class_video) as $class_vid)
+                                                <div id="collapseOne{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne{{$item->id}}" data-bs-parent="#accordionExample{{$item->id}}">
+                                                    <div class="accordion-body">
+                                                        <button class="tablinks" onclick="openCity(event, '{{ $item->chapter->chapter_name }}{{ $loop->index }}')" id="defaultOpen">{{ $item->chapter->chapter_name }} Class {{ $loop->index+1 }}</button>
+                                                    </div>
                                                 </div>
-                                                
-                                            </div> --}}
-                                    @endforeach 
-                                    
-   
+                                         
+                                            @endforeach
+                                        </div> 
+                                    </div>
+                                    @endforeach
+
+                                       
                                 </div>
                             </div>
                         </div>

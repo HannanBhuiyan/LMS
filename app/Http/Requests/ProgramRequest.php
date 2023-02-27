@@ -27,7 +27,7 @@ class ProgramRequest extends FormRequest
         if(request()->routeIs('programs.store')){
             $imageRules = 'required';
         }elseif(request()->routeIs('programs.update')){
-            $imageRules = 'sometimes';
+            $imageRules = '';
         }
  
         return [

@@ -23,7 +23,7 @@
                         <form action="{{ route('profile.image.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="old_image" value="{{ Auth::user()->student_image }}">
-                                <img alt="avatar" width="300px" id="img" height="300px" src="{{ asset(Auth::user()->student_image ) }}" class="brround">
+                                <img alt="avatar" width="300px" id="img" height="300px" src="{{ (!empty(Auth::user()->student_image)) ? asset(Auth::user()->student_image): asset('backend/assets/uploads/default.jpg') }}" class="brround">
                                 <input onchange="document.getElementById('img').src=window.URL.createObjectURL(this.files[0])" type="file" name="student_image" class="form-control my-4">
                                 <input type="submit" value="Upload" class="btn btn-success">
                         </form>

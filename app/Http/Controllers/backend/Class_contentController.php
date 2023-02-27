@@ -124,19 +124,15 @@ class Class_contentController extends Controller
             'chapter_id.required' => 'The chapter field is required'
         ]);
 
-        $exist = Class_content::where('course_id', $request->course_id)->where('chapter_id', $request->chapter_id)->exists();
-
-        if($exist){
-            return back()->with('fail', 'chapter alresdy exists in this course');
-        }else{
-            $class = Class_content::findOrFail($id);
-            $class->course_id = $request->course_id;
-            $class->blog_id = $request->blog_id;
-            $class->chapter_id = $request->chapter_id;
-            if($request->class_video){
-                $class->class_video = json_encode($request->class_video);
-            }
+        
+        $class = Class_content::findOrFail($id);
+        $class->course_id = $request->course_id;
+        $class->blog_id = $request->blog_id;
+        $class->chapter_id = $request->chapter_id;
+        if($request->class_video){
+            $class->class_video = json_encode($request->class_video);
         }
+        
         
         $class->save();
 

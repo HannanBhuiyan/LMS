@@ -13,7 +13,7 @@
            <form action="{{ route('programs.store') }}" method="post" enctype="multipart/form-data">
             @csrf
                 <div class="form-group">
-                    <label for="">Course</label>
+                    <label class="form-label" for="">Course</label>
                     <select name="course_id" class="form-control">
                         <option value selected>--Select Course--</option>
                         @foreach ($courses as $course)
@@ -25,21 +25,21 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Program Title</label>
+                    <label class="form-label">Program Title</label>
                     <input type="text" name="title" placeholder="Enter Program Title" class="form-control">
                     @error('title')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Program Description</label>
+                    <label class="form-label">Program Description</label>
                     <textarea name="description" class="form-control" rows="7" placeholder="Enter Program Description"></textarea>
                     @error('description')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Image</label>
+                    <label class="form-label">Image(size: 50 x 50)</label>
                     <input type="file" name="image" class="form-control">
                     @error('image')
                         <p class="text-danger">{{ $message }}</p>

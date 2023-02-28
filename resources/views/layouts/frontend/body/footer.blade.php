@@ -16,8 +16,7 @@
                                     <li class=""><a href="{{ social_links()->instragram }}"><i class="fa-brands fa-instagram"></i></a></li>
                                     <a href="{{ social_links()->telegram }}"><img src="{{ asset('frontend/assets/image/icon/telegram.png') }}" alt="icon"></a>
                                 @endif
-                            </ul>
-                            <button class="applyBtn" style="background: #333; border: none; font-weight: 400; color: #C0C0C0;">Refer and earn</button>
+                            </ul> 
                         </div>
                     </div>
                 </div>
@@ -35,7 +34,7 @@
                 </div>
                 <div class="col-sm-6 col-md-4">
                     <div class="footerBox mb-4 mb-lg-0">
-                        <h2>For Business</h2>
+                        <h2>Courses</h2>
                         <div class="footer__list">
                             <ul>
                                 @forelse (getFiveCourse() as $course)

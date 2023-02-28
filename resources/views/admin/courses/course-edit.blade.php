@@ -70,12 +70,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Thumbnail</label>
+                    <label class="form-label">Thumbnail <span class="text-danger">(Size = Width:392px, Height:280px)</span></label>
                     <input type="file" onchange="document.getElementById('img').src=window.URL.createObjectURL(this.files[0])" class="form-control" name="thumbnail">
                 </div>
 
                 <div class="form-group">
-                    <label for="form-label"></label>
+                    <label class="form-label">Feature Image <span class="text-danger">(Size = Width:588px, Height:540px)</span></label>
                     <img width="100px" height="100px" id="img" src="{{ (!empty($course->thumbnail))? url($course->thumbnail):url('backend/assets/uploads/default.jpg') }}">
                 </div>
 

@@ -15,7 +15,7 @@
                     <h3>Courses List</h3>
                </div>
                <div class="right">
-                    <a class="btn btn-primary" href="{{ route('program_overview.create') }}">Add New Content</a>
+                    <a class="btn btn-primary" href="{{ route('program_overview.create') }}">Add Overview Content</a>
                </div>
             </div>
             <div class="table-responsive">

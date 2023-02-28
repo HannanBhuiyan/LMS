@@ -44,83 +44,42 @@
                                 class="side-menu__label">Dashboard</span></a>
                     </li>
 
-                    <li class="slide {{ request()->routeIs('courses*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item {{ request()->routeIs('courses*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
+                    <li class="slide {{ request()->routeIs(['courses.index', 'courses.create', 'courses.index', 'courses.edit', 'programs.index', 'programs.create', 'programs.show', 'programs.edit', 'program_overview.index', 'program_overview.edit', 'program_overview.create']) ? 'is-expanded' : '' }}">
+                        <a class="side-menu__item {{ request()->routeIs(['courses.index', 'courses.create', 'courses.index', 'courses.edit', 'programs.index', 'programs.create', 'programs.show', 'programs.edit', 'program_overview.index', 'program_overview.edit', 'program_overview.create']) ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
                                 class="side-menu__icon fe fe-layers"></i><span
                                 class="side-menu__label">Courses</span><i
                                 class="angle fe fe-chevron-right"></i></a>
                         <ul class="slide-menu">
                             <li><a href="{{ route('courses.index') }}" class="slide-item {{ request()->routeIs('courses.index') ? 'active' : '' }}">Courses</a></li>
-                            <li><a href="{{ route('courses.create') }}" class="slide-item {{ request()->routeIs('courses.create') ? 'active' : '' }}">Add Course</a></li>
-                        </ul>
+                            <li><a href="{{ route('programs.index') }}" class="slide-item {{ request()->routeIs('programs.index') ? 'active' : '' }}">Course Content</a></li> 
+                            <li><a href="{{ route('program_overview.index') }}" class="slide-item {{ request()->routeIs('program_overview.index') ? 'active' : '' }}">Course Overview List</a></li>
+                        </ul> 
                     </li>
 
-                    <li class="slide {{ request()->routeIs('chapter*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item {{ request()->routeIs('chapter*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
+
+                    <li class="slide {{ request()->routeIs(['chapter.index', 'chapter.create', 'chapter.edit', 'batch.index', 'batch.create', 'batch.edit' ,'class-content.index', 'class-content.create', 'class-content.show', 'class-content.edit']) ? 'is-expanded' : '' }}">
+                        <a class="side-menu__item {{ request()->routeIs(['chapter.index', 'chapter.create', 'chapter.edit', 'batch.index', 'batch.create', 'class-content.index', 'class-content.create', 'class-content.show']) ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
                                 class="side-menu__icon fe fe-package"></i><span
-                                class="side-menu__label">Chapter</span><i
+                                class="side-menu__label">Class Management</span><i
                                 class="angle fe fe-chevron-right"></i></a>
                         <ul class="slide-menu">
-                            <li><a href="{{ route('chapter.index') }}" class="slide-item {{ request()->routeIs('chapter.index') ? 'active' : '' }}">Chapter List</a></li>
-                            <li><a href="{{ route('chapter.create') }}" class="slide-item {{ request()->routeIs('chapter.create') ? 'active' : '' }}">Add Chapter</a></li>
+                            <li><a href="{{ route('batch.index') }}" class="slide-item {{ request()->routeIs('batch.index') ? 'active' : '' }}">Batch</a></li>
+                            <li><a href="{{ route('chapter.index') }}" class="slide-item {{ request()->routeIs('chapter.index') ? 'active' : '' }}">Chapter</a></li>
+                            <li><a href="{{ route('class-content.index') }}" class="slide-item {{ request()->routeIs('class-content.index') ? 'active' : '' }}">Class Content</a></li>  
                         </ul>
                     </li>
-
- 
-                    <li class="slide {{ request()->routeIs('class-content*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item {{ request()->routeIs('class-content*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                class="side-menu__icon fe fe-book"></i><span
-                                class="side-menu__label">Classes</span><i
-                                class="angle fe fe-chevron-right"></i></a>
-                        <ul class="slide-menu">
-                            <li><a href="{{ route('class-content.index') }}" class="slide-item {{ request()->routeIs('class-content.index') ? 'active' : '' }}">Classes</a></li>
-                            <li><a href="{{ route('class-content.create') }}" class="slide-item {{ request()->routeIs('class-content.create') ? 'active' : '' }}">Add Class</a></li>
-                        </ul>
-                    </li>
-                    
-
-                    <li class="slide {{ request()->routeIs('batch*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item {{ request()->routeIs('batch*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                class="side-menu__icon fe fe-users"></i><span
-                                class="side-menu__label">Batches</span><i
-                                class="angle fe fe-chevron-right"></i></a>
-                        <ul class="slide-menu">
-                            <li><a href="{{ route('batch.index') }}" class="slide-item {{ request()->routeIs('batch.index') ? 'active' : '' }}">Batches</a></li>
-                            <li><a href="{{ route('batch.create') }}" class="slide-item {{ request()->routeIs('batch.create') ? 'active' : '' }}">Add Batch</a></li>
-                        </ul>
-                    </li>
-                   
-
-                    <li class="slide {{ request()->routeIs(['student.index','student.create','student.edit']) ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item {{ request()->routeIs(['student.index','student.create','student.edit']) ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
+  
+                    <li class="slide {{ request()->routeIs(['student.index','student.create','student.edit', 'assignstudent.index', 'assignstudent.create', 'assignstudent.edit']) ? 'is-expanded' : '' }}">
+                        <a class="side-menu__item {{ request()->routeIs(['student.index','student.create','student.edit', 'assignstudent.index', 'assignstudent.create', 'assignstudent.edit']) ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
                                 class="side-menu__icon fe fe-user"></i><span
-                                class="side-menu__label">Students</span><i
+                                class="side-menu__label">Student Management</span><i
                                 class="angle fe fe-chevron-right"></i></a>
                         <ul class="slide-menu">
                             <li><a href="{{ route('student.index') }}" class="slide-item {{ request()->routeIs('student.index') ? 'active' : '' }}">Students</a></li>
-                            <li><a href="{{ route('student.create') }}" class="slide-item {{ request()->routeIs('student.create') ? 'active' : '' }}">Add Student</a></li>
+                            <li><a href="{{ route('assignstudent.index') }}" class="slide-item {{ request()->routeIs('assignstudent.index') ? 'active' : '' }}">Assign Student</a></li>
                         </ul>
-                    </li>
-
-
-                    <li class="slide {{ request()->routeIs('assignstudent*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item {{ request()->routeIs('assignstudent*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                class="side-menu__icon fe fe-user-check"></i><span
-                                class="side-menu__label">Assign Student</span><i
-                                class="angle fe fe-chevron-right"></i></a>
-                        <ul class="slide-menu">
-                            <li><a href="{{ route('assignstudent.index') }}" class="slide-item {{ request()->routeIs('assignstudent.index') ? 'active' : '' }}">Assign Student List</a></li>
-                            <li><a href="{{ route('assignstudent.create') }}" class="slide-item {{ request()->routeIs('assignstudent.create') ? 'active' : '' }}">Add Assign Student</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="slide">
-                        <a class="side-menu__item has-link {{ request()->routeIs('students.management') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('students.management') }}"><i
-                                class="side-menu__icon fe fe-briefcase"></i><span
-                                class="side-menu__label">Student Management</span></a>
-                    </li>
-
-
+                    </li> 
+  
                     <li class="slide {{ request()->routeIs('blog*') ? 'is-expanded' : '' }}">
                         <a class="side-menu__item {{ request()->routeIs('blog*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
                                 class="side-menu__icon fe fe-file"></i><span
@@ -136,43 +95,15 @@
                     <li class="slide {{ request()->routeIs('social_links*') ? 'is-expanded' : '' }}">
                         <a class="side-menu__item {{ request()->routeIs('social_links*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
                                 class="side-menu__icon fe fe-globe"></i><span
-                                class="side-menu__label">Social Link</span><i
+                                class="side-menu__label">Settings</span><i
                                 class="angle fe fe-chevron-right"></i></a>
                         <ul class="slide-menu"> 
-                            <li><a href="{{ route('social_links.index') }}" class="slide-item {{ request()->routeIs('social_links.index') ? 'active' : '' }}"> Social Link List</a></li>
+                            <li><a href="{{ route('social_links.index') }}" class="slide-item {{ request()->routeIs('social_links.index') ? 'active' : '' }}">Social Links</a></li>
+                            <li><a href="{{ route('site_logo.index') }}" class="slide-item {{ request()->routeIs('site_logo.index') ? 'active' : '' }}">Site Logo</a></li>
                            
                         </ul>
                     </li>
- 
-                    <li class="slide {{ request()->routeIs('programs*') ? 'is-expanded' : '' }}">
-                        <a class="side-menu__item {{ request()->routeIs('programs*') ? 'is-expanded active' : '' }}" data-bs-toggle="slide" href="javascript:void(0)"><i
-                                class="side-menu__icon fe fe-file-text"></i><span
-                                class="side-menu__label">Program Content</span><i
-                                class="angle fe fe-chevron-right"></i></a>
-                        <ul class="slide-menu"> 
-                            <li>
-                                <a href="{{ route('programs.index') }}" class="slide-item {{ request()->routeIs('programs.index') ? 'active' : '' }}">   Program List</a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('programs.create') }}" class="slide-item {{ request()->routeIs('programs.create') ? 'active' : '' }}">   Add Program Conent</a>
-                            </li>
-                          
-                        </ul>
-                    </li>
-
-                    <li class="slide">
-                        <a class="side-menu__item has-link {{ request()->routeIs('site_logo.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('site_logo.index') }}"><i
-                                class="side-menu__icon fe fe-upload"></i><span
-                                class="side-menu__label">Site logo</span></a>
-                    </li>
-
-                    <li class="slide">
-                        <a class="side-menu__item has-link {{ request()->routeIs('program_overview.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('program_overview.index') }}"><i
-                                class="side-menu__icon fe fe-menu"></i><span
-                                class="side-menu__label">Program Overview List</span></a>
-                    </li>
-
+    
                     <li class="slide">
                         <a class="side-menu__item has-link {{ request()->routeIs('contact.index') ? 'active' : '' }}" data-bs-toggle="slide" href="{{ route('contact.index') }}"><i
                                 class="side-menu__icon fe fe-mail"></i><span

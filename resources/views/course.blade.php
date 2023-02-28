@@ -7,10 +7,10 @@
         <div class="container">
             <div class="landing__inner">
                 <div class="row gx-4 gx-md-5">
-                    <div class="col-md-5">
-                        <img width="100%" src="{{ asset($item->thumbnail) }}" alt="image">
+                    <div class="col-md-6">
+                        <img width="100%" src="{{ asset($item->feature_image) }}" alt="image">
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <div class="landing__content">
                             <div class="title">
                                 {{-- <img src="{{ asset('frontend/assets/image//logo/logo.png') }}" alt="logo"> --}}

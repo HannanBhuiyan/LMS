@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('course_short_des');
             $table->text('course_desceiption');
             $table->string('status')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail');
+            $table->string('feature_image');
             $table->timestamps();
         });
     }

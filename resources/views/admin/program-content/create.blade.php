@@ -5,8 +5,8 @@
     <div class="col-md-12 m-auto">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('programs.index') }}">Program</a></li>
-                <li class="breadcrumb-item active">Program Content</li>
+                <li class="breadcrumb-item"><a href="{{ route('programs.index') }}">Course</a></li>
+                <li class="breadcrumb-item active">Course Content</li>
             </ol>
           </nav>
         <div class="card p-3 mt-4">

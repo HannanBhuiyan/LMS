@@ -6,16 +6,16 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Program Content</li>
+                <li class="breadcrumb-item active">Course Content</li>
             </ol>
           </nav>
         <div class="card p-3 mt-4">
             <div class="category_title my-3 d-flex justify-content-between">
                <div class="left">
-                    <h3>Program Content List</h3>
+                    <h3>Course Content List</h3>
                </div>
                <div class="right">
-                    <a href="{{ route('programs.create') }}" class="btn btn-success">Add Program Content</a>
+                    <a href="{{ route('programs.create') }}" class="btn btn-success">Add Course Content</a>
                </div>
             </div>
             <div class="table-responsive">

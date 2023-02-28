@@ -455,24 +455,12 @@ input#phone{
 /* ====================================
         landing page start here
 ========================================*/
-.landing__banner{
-    /* background-image: url(../image/section/banner2.png);
-    background-repeat: no-repeat; */
-}
-
-.hellosss{
-    /* background-image: url(../image/section/banner2.png);
-    height: 100%; */
-}
-
-.landing__content {
-    /* padding: 86px 0; */
-}
 
 .landing__content h2 {
-    font-size: 48px;
+    font-size: 47px;
     line-height: 56px;
     font-family: var(--p--roboto);
+    font-weight: 700;
 }
 
 .landing__content .info {
@@ -480,9 +468,9 @@ input#phone{
 }
 
 .landing__content .info h4 {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 400;
-    line-height: 32px;
+    line-height: 30px;
     width: 100%;
     max-width: 494px;
     font-family: var(--p--roboto);
@@ -499,14 +487,13 @@ input#phone{
 }
 
 
-
 .session .box {
     text-align: center;
     width: 191px;
-    height: 205px;
+    height: 183px;
     background: #f5f5f5;
     margin-right: 11px;
-    padding: 35px 32px;
+    padding: 24px 20px;
     cursor: pointer;
     border-radius: 10px;
     margin-bottom: 40px;
@@ -541,7 +528,7 @@ input#phone{
 }
 
 .session .box h4{
-    font-size: var(--font-20);
+    font-size: 16px;
     font-family: var(--p--roboto);
 }
 

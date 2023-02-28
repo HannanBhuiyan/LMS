@@ -47,10 +47,14 @@ class CourseController extends Controller
             'start_date' => 'required',
             'course_short_des' => 'required',
             'course_desceiption' => 'required',
+            'feature_image' => 'required',
+            'thumbnail' => 'required',
         ],[
             'course_name.required' => 'The course name is required',
             'course_name.unique' => 'The course name should be unique',
             'course_short_des.required' => 'The course short description is required',
+            'feature_image.required' => 'Feature image is required',
+            'thumbnail.required' => 'Thumbnail is required',
         ]);
 
         if($request->file('thumbnail'))
@@ -59,7 +63,17 @@ class CourseController extends Controller
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
             $location = 'backend/assets/uploads/course/';
             $final_image = $location.$name_gen;
-            Image::make($image)->save($final_image);
+            Image::make($image)->resize(392, 280)->save($final_image);
+
+        }
+
+        if($request->file('feature_image'))
+        {
+            $image = $request->file('feature_image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $location = 'backend/assets/uploads/course/';
+            $feature_final_image = $location.$name_gen;
+            Image::make($image)->resize(588, 540)->save($feature_final_image);
 
         }
 
@@ -73,9 +87,12 @@ class CourseController extends Controller
         $course->course_desceiption = $request->course_desceiption;
         if(!empty($final_image)){
             $course->thumbnail = $final_image;
+        } 
+        if(!empty($feature_final_image)){
+            $course->feature_image = $feature_final_image;
         }
-        $course->save();
 
+        $course->save();
         return redirect()->route('courses.index')->with('success', 'Course create successfully');
     }
 

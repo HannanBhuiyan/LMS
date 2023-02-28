@@ -28,8 +28,7 @@
                         <th scope="col">Duration</th>
                         <th scope="col">Status</th>
                         <th scope="col">Start date</th>
-                        <th scope="col">Short Description</th>
-                        {{-- <th scope="col">Description</th> --}}
+                        <th scope="col">Short Description</th> 
                         <th scope="col">Thumbnail</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -51,8 +50,7 @@
 
                             </td>
                             <td>{{ $items->start_date }}</td>
-                            <td>{!! Str::limit($items->course_short_des, 30, '...') !!}</td>
-                            {{-- <td>{!! substr($items->course_desceiption,0,200 )!!}</td> --}}
+                            <td>{!! Str::limit($items->course_short_des, 30, '...') !!}</td> 
                             <td>
                                 <img width="100px" height="100px" src="{{ (!empty($items->thumbnail)) ? asset($items->thumbnail) : asset('backend/assets/uploads/default.jpg') }}" alt="image">
                             </td>

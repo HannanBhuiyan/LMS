@@ -29,10 +29,11 @@
             <a href="{{ route('single.course.show', $course->id ) }}">
                 <div class="card p-3">
                     <img height="350" width="100%" src="{{ $course->relationwithcourse->thumbnail }}" alt="">
-                    <h1 class="course_title">{{ $course->relationwithcourse->course_name }}</h1>
+                    <h1 class="course_title">{{ $course->relationwithcourse->course_name }} </h1>
+                    <h4 style="color: #000; margin: 10px 0px; font-size: 17px;">Batch  Name: ({{$course->relationwithbatch->batch_name}})</h4>
 
                     @if ($course->relationwithcourse->course_short_des)
-                        <p class="course_para">{{ $course->relationwithcourse->course_short_des }}</p>
+                        <p class="course_para" style="font-size: 16px;">{{ $course->relationwithcourse->course_short_des }}</p>
                     @else
                         <p>There is no blog found</p>
                     @endif

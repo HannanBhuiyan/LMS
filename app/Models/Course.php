@@ -30,4 +30,7 @@ class Course extends Model
     {
         return $this->hasMany(assigncourse::class);
     }
+
+     
 }
+

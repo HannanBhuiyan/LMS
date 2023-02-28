@@ -19,7 +19,7 @@
                </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable">
+                <table class="table table-bordered text-nowrap border-bottom text-center" id="basic-datatable">
                     <thead>
                     <tr>
                         <th scope="col">SL No</th>
@@ -42,7 +42,12 @@
                             </td>
                             <td>
                                 <a href="{{ route('student.edit', $items->id) }}" class="btn btn-success">Edit</a>
-                                <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaldemo8__{{ $items->id }}">Delete</a>
+                                <a href="" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#modaldemo8__{{ $items->id }}">Delete</a>
+                                @if ($items->isban == 0)
+                                    <a href="{{ route('students.disabled', $items->id) }}" class="btn btn-primary">Disabled</a>
+                                @else
+                                    <a href="{{ route('students.active', $items->id) }}" class="btn btn-info">Active</a>
+                                @endif
                             </td>
                         </tr>
 

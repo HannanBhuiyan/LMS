@@ -47,6 +47,9 @@
         <div class="page">
             <div class="">
                 <div class="container-login100">
+                    @error('Banned')
+                        <h4 class="alert alert-danger">{{ $message }}</h4>
+                    @enderror
                     <div class="wrap-login100 p-6">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf

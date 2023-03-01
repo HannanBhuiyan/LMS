@@ -60,8 +60,8 @@
                     @forelse ($programs as $program)
                         <div class="program__box m-4 m-lg-0">
                             <img  src="{{ asset($program->image) }}" alt="icon">
-                            <h4>{{ $program->title }}</h4>
-                            <p>{{ $program->description }}</p>
+                            <h4>{{ Str::limit( $program->title, 30, '') }}</h4>
+                            <p>{{ Str::limit($program->description, 90, '') }}</p>
                         </div>
                     @empty
                         <div class="notfound" style="text-align:center !important; width:100%">

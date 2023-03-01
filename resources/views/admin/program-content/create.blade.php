@@ -25,14 +25,14 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Program Title</label>
+                    <label class="form-label">Program Title  <span style="color:red">(2 - 3 words)</span></label>
                     <input type="text" name="title" placeholder="Enter Program Title" class="form-control">
                     @error('title')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Program Description</label>
+                    <label class="form-label">Program Description <span style="color:red">(12 - 14 words)</span></label>
                     <textarea name="description" class="form-control" rows="7" placeholder="Enter Program Description"></textarea>
                     @error('description')
                         <p class="text-danger">{{ $message }}</p>

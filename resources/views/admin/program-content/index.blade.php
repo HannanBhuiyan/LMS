@@ -36,7 +36,7 @@
                             <td>
                                 <img src="{{ asset($program_content->image) }}" width="100" height="100" alt="img">
                             </td>
-                            <td>{{ $program_content->title }}</td>
+                            <td>{{ Str::limit($program_content->title, 30) }}</td>
                             <td>{{ Str::limit($program_content->description, 50, '...') }}</td> 
                             <td>
                                 <a href="{{ route('programs.show', $program_content->id) }}" class="btn btn-info">View</a>

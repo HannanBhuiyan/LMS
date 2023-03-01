@@ -148,9 +148,24 @@ class CourseController extends Controller
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
             $location = 'backend/assets/uploads/course/';
             $final_image = $location.$name_gen;
-            Image::make($image)->save($final_image);
+            Image::make($image)->resize(392, 280)->save($final_image);
             $course->thumbnail = $final_image;
         }
+
+
+        if($request->file('feature_image'))
+        {
+            if(file_exists($course->feature_image)){
+                unlink($course->feature_image);
+            }
+            $image = $request->file('thumbnail');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $location = 'backend/assets/uploads/course/';
+            $final_feature_image = $location.$name_gen;
+            Image::make($image)->resize(588, 540)->save($final_feature_image);
+            $course->feature_image = $final_feature_image;
+        }
+ 
 
         $course->course_name = $request->course_name;
         $course->slug = Str::slug($request->course_name);
@@ -181,6 +196,9 @@ class CourseController extends Controller
             if($course->thumbnail){
                 unlink($course->thumbnail);
             }
+            if($course->feature_image){
+                unlink($course->feature_image);
+            }
             $course->delete();
             return redirect()->back()->with('success', 'Course delete successfully');
         }
@@ -198,11 +216,7 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Course Active Successfully');
     }
 
-    public function courseVideoDelete($id) {
-        return back();
-        // QuestionOption::findOrFail($id)->delete();
-        // return response(['success' => 'data delete success']);
-    }
+    
 
 
 

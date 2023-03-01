@@ -19,11 +19,12 @@
                </div>
             </div>
             <div class="table-responsive">
-                <table class="table text-center table-bordered text-nowrap border-bottom" id="basic-datatable">
+                <table class="table table-bordered text-nowrap border-bottom" id="basic-datatable">
                     <thead>
                     <tr>
                         <th scope="col">SL No</th>
-                        <th scope="col">Overview Content</th> 
+                        <th scope="col">Course Name</th>  
+                        <th scope="col">Overview Content</th>  
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -32,7 +33,14 @@
                         @foreach ($program_overview as $items)
                         <tr>
                             <td>{{ $loop->index+1 }}</td> 
-                            <td>{{ $items->overview_content }}</td>  
+                           <td> {{ $items->relationWithCourse->course_name }}</td>
+                           <td>
+                            @foreach (json_decode($items->overview_content) as $item)
+                                <ul>
+                                    <li>{{ $item }}</li>
+                                </ul>
+                            @endforeach
+                           </td>
                             <td>  
                                 <a href="{{ route('program_overview.edit', $items->id) }}" class="btn btn-primary">Edit</a>
                                 <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaldemo8__{{ $items->id }}">Delete</a>

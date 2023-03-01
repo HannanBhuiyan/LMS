@@ -69,7 +69,6 @@
                     <div class="btn btn-info mt-1" id="add_more">Add More</div>
                 </div>
 
-
                 <div class="form-group">
                     <input class="btn btn-secondary btn-pill" type="submit" value="Add class">
                 </div>

@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-2">
                                 <button type="button" class="close remove--new_properties">
-                                    <span class="option_delete" data-id="{{ $item->id }}" >&times;</span>
+                                    <span class="option_delete" >&times;</span>
                                 </button>
                             </div>
                         </div>

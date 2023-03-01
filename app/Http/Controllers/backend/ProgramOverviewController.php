@@ -21,10 +21,10 @@ class ProgramOverviewController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
         $courses = Course::all();
@@ -39,16 +39,26 @@ class ProgramOverviewController extends Controller
      */
     public function store(Request $request)
     {
+
+ 
         $request->validate([
-            '*' => 'required'
+            'course_id' => 'required',
+            'overview_content' => 'required'
         ],[
+            'course_id.required' => 'Course name is required !',
             'overview_content.required' => 'Overview content is required !'
         ]);
 
-
         $data = new ProgramOverview();
+
+        $exists_course_id = ProgramOverview::where('course_id', $request->course_id)->exists();
+
+        if($exists_course_id == 1){
+            return redirect()->back()->with('fail', 'Your course already exists. Please try another course or update this course');
+        }
+
         $data->course_id = $request->course_id;
-        $data->overview_content = $request->overview_content;
+        $data->overview_content = json_encode($request->overview_content);
         $data->save();
         return redirect()->back()->with('success', 'Content added success');
 
@@ -73,8 +83,9 @@ class ProgramOverviewController extends Controller
      */
     public function edit($id)
     {
+        $courses = Course::all();
         $programoverview = ProgramOverview::findOrFail($id);
-        return view('admin.program-overview.edit', compact('programoverview'));
+        return view('admin.program-overview.edit', compact('programoverview', 'courses'));
     }
 
     /**
@@ -86,17 +97,37 @@ class ProgramOverviewController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
-            '*' => 'required'
+            'course_id' => 'required',
+            'overview_content' => 'required'
         ],[
+            'course_id.required' => 'Course name is required !',
             'overview_content.required' => 'Overview content is required !'
         ]);
 
-
         $data = ProgramOverview::findOrFail($id);
-        $data->overview_content = $request->overview_content;
-        $data->save();
-        return redirect()->back()->with('success', 'Content update success');
+        $exists_course_id = ProgramOverview::where('course_id', $request->course_id)->exists();
+      
+        $totalSubdata = count(json_decode($data->overview_content));
+        $totalRequestSubdata = count($request->overview_content);
+
+        if($exists_course_id == 1){
+            if( $totalSubdata !=  $totalRequestSubdata ){
+                $data->overview_content = json_encode($request->overview_content);
+                $data->save();
+                return redirect()->back()->with('success', 'Course Update');
+            } 
+            return redirect()->back()->with('fail', 'Course not update. Course already exists');
+        }
+        else {
+            $data->course_id = $request->course_id;
+            $data->overview_content = json_encode($request->overview_content);
+            $data->save();
+            return redirect()->back()->with('success', 'Content update success');
+        }
+ 
+
     }
 
     

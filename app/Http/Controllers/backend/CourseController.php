@@ -64,8 +64,8 @@ class CourseController extends Controller
             $location = 'backend/assets/uploads/course/';
             $final_image = $location.$name_gen;
             Image::make($image)->resize(392, 280)->save($final_image);
-
         }
+
 
         if($request->file('feature_image'))
         {
@@ -74,7 +74,6 @@ class CourseController extends Controller
             $location = 'backend/assets/uploads/course/';
             $feature_final_image = $location.$name_gen;
             Image::make($image)->resize(588, 540)->save($feature_final_image);
-
         }
 
         $course = new Course;

@@ -108,7 +108,7 @@
                                                         @endif
                                                     </td> 
                                                     <td>
-                                                        <a href="{{ route('class-content.edit', $items->id) }}" class="btn btn-success">Edit</a>
+                                                        <a href="{{ route('class-content-edit', ['id'=>$items->id,'batchId'=>$items->batch->id]) }}" class="btn btn-success">Edit</a>
                                                         <a href="{{ route('class-content.show', $items->id) }}" class="btn btn-secondary">Show</a>
                                                         <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaldemo8__{{ $items->id }}">Delete</a>
                                                     </td>

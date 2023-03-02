@@ -97,11 +97,12 @@ class Class_contentController extends Controller
      */
     public function edit($id)
     {
-        $class_content = Class_content::findOrFail($id);
-        $course = Course::latest()->get();
-        $blog = Blog::latest()->get();
-        $chapter = Chapter::latest()->get();
-        return view('admin.class-content.class-edit', compact('class_content', 'course','blog','chapter'));
+        // $class_content = Class_content::findOrFail($id);
+        // $course = Course::latest()->get();
+        // $batches = Batch::where('course_id', $id)->get();
+        // $chapter = Chapter::latest()->get();
+        // $blog = Blog::latest()->get();
+        // return view('admin.class-content.class-edit', compact('class_content', 'course','blog','chapter','batches'));
     }
 
     /**
@@ -127,8 +128,9 @@ class Class_contentController extends Controller
         
         $class = Class_content::findOrFail($id);
         $class->course_id = $request->course_id;
-        $class->blog_id = $request->blog_id;
+        $class->batch_id = $request->batch_id;
         $class->chapter_id = $request->chapter_id;
+        $class->blog_id = $request->blog_id;
         if($request->class_video){
             $class->class_video = json_encode($request->class_video);
         }
@@ -160,6 +162,39 @@ class Class_contentController extends Controller
     public function chapterNameGetByAjax($id)
     {
         return Chapter::where('batch_id', $id)->orderBy('chapter_name', 'ASC')->get();
+    }
+
+    public function classContentEdit($id,$batchId)
+    {
+        $class_content = Class_content::findOrFail($id);
+        $course = Course::latest()->get();
+
+        $batches = Batch::where('id', $class_content->batch_id)->get();
+
+        $chapter = Chapter::where('batch_id',$batchId)->get();
+
+        $blog = Blog::latest()->get();
+        return view('admin.class-content.class-edit', compact('class_content', 'course','blog','chapter','batches'));
+    }
+
+    public function batch_dropdown(Request $request)
+    {
+        $show_batch_name = "<option value>Select Batch</option>";
+        $batches = Batch::where('course_id', $request->course_id)->get(['id','batch_name']);
+        foreach ($batches as $batch) {
+            $show_batch_name .= "<option value='$batch->id'>$batch->batch_name</option>";
+        }
+        echo $show_batch_name;
+    }
+
+    public function chapter_dropdown(Request $request)
+    {
+        $show_chapter_name = "<option value>Select Chapter</option>";
+        $chapters = Chapter::where('batch_id', $request->batch_id)->get(['id','chapter_name']);
+        foreach ($chapters as $chapter) {
+            $show_chapter_name .= "<option value='$chapter->id'>$chapter->chapter_name</option>";
+        }
+        echo $show_chapter_name;
     }
 
     

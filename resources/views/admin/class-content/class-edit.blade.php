@@ -29,6 +29,31 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label class="form-label">Batch Name<span class="text-danger">*</span></label> 
+                    <select name="batch_id" class="form-control" id="batch_dropdown">
+                        <option value selected>--Select Batch--</option>
+                        @foreach($batches as $item )
+                            <option value="{{ $item->id }}" {{ $item->id == $class_content->batch_id ? 'selected': ''}}>{{ $item->batch_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('batch_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
+                    <select name="chapter_id" class="form-control form-select select2" data-bs-placeholder="Select" id="chapter_dropdown">
+                        <option selected="" disabled="">Select Chapter</option>
+                        @foreach($chapter as $item )
+                            <option value="{{ $item->id }}" {{ $item->id == $class_content->chapter_id ? 'selected': ''}}>{{ $item->chapter_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('chapter_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
 
                 <div class="form-group">
                     <label class="form-label">Blog Name<span class="text-danger">*</span></label>
@@ -39,19 +64,6 @@
                         @endforeach
                     </select>
                     @error('blog_id')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
-                    <select name="chapter_id" class="form-control form-select select2" data-bs-placeholder="Select">
-                        <option selected="" disabled="">Select Chapter</option>
-                        @foreach($chapter as $item )
-                            <option value="{{ $item->id }}" {{ $item->id == $class_content->chapter_id ? 'selected': ''}}>{{ $item->chapter_name }}</option>
-                        @endforeach
-                    </select>
-                    @error('chapter_id')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -88,11 +100,6 @@
 
 @section('scripts')
 <script>
-    $.ajaxSetup({
-         headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         }
-   });
    $(document).ready(function () {
      
        $('#add_more').click(function (){
@@ -115,5 +122,86 @@
        });
        
    });
+</script>
+
+{{-- <script type="text/javascript">
+    $('select[name="course_id"]').on('change', function(event){
+       event.preventDefault();
+       let course_id = $(this).val();
+       axios.get('changeCourseName/ajax/'+ course_id)
+       .then(function(response){
+           if(response.status === 200){ 
+                   $('select[name="chapter_id"]').html(" ");
+                   $('select[name="chapter_id"]').append('<option>--select batch--</option>')
+                   $('select[name="batch_id"]').empty();
+                   $('select[name="batch_id"]').append('<option>--select batch--</option>')
+               $.each(response.data, function(key, value){
+                  
+                   $('select[name="batch_id"]').append('<option value="'+ value.id +'">'+ value.batch_name +'</option>')
+               })
+           }
+       })
+       .catch(function(error){
+           console.log(error);
+       })
+   });
+
+
+   $('select[name="batch_id"]').on('change', function(event){
+           event.preventDefault();
+           let batch_id = $(this).val();
+          
+           axios.get('changeBatchName/ajax/'+ batch_id)
+              
+               .then(function(response){
+                   if(response.status === 200){
+                       let d = $('select[name=""]').empty(); 
+                       $.each(response.data, function(key, value){
+                           $('select[name="chapter_id"]').append( '<option value="'+ value.id +'">'+ value.chapter_name+'</option>')
+                       })
+                   }
+               })
+               .catch(function(error){
+                   console.log("Somthing Wrong! Please try again");
+               });
+       })
+</script> --}}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('select[name="course_id"]').on('change', function(event){
+        event.preventDefault();
+        let course_id = $(this).val();
+        // alert(course_id)
+        
+            $.ajax({
+                url: "{{ route('batch_dropdown') }}",
+                type: "POST",
+                data: {
+                    course_id : course_id,
+                },
+                success: function(data){
+                    $('#batch_dropdown').html(data)
+                },
+            });
+        });
+
+        $('select[name="batch_id"]').on('change', function(event){
+        event.preventDefault();
+        let batch_id = $(this).val();
+        // alert(batch_id)
+        
+            $.ajax({
+                url: "{{ route('chapter_dropdown') }}",
+                type: "POST",
+                data: {
+                    batch_id : batch_id,
+                },
+                success: function(data){
+                    $('#chapter_dropdown').html(data)
+                },
+            });
+        });
+    });
 </script>
 @endsection

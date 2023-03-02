@@ -58,7 +58,7 @@ class ChapterController extends Controller
             $chapter->save();
             return redirect()->back()->with('success', 'Chapter add Successfully');
         }else{
-            return redirect()->back()->with('fail', 'Chapter Already exists');
+            return redirect()->route('chapter.index')->with('fail', 'Chapter Already exists');
         }
     }
 

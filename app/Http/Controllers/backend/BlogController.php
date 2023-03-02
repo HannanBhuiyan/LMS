@@ -48,7 +48,7 @@ class BlogController extends Controller
         $blog->blog_title = $request->blog_title;
         $blog->blog_content = $request->blog_content;
         $blog->save();
-        return redirect()->back()->with('success', 'Blog added successfully');
+        return redirect()->route('blog.index')->with('success', 'Blog added successfully');
 
     }
 
@@ -93,7 +93,7 @@ class BlogController extends Controller
         $blog->blog_title = $request->blog_title;
         $blog->blog_content = $request->blog_content;
         $blog->save();
-        return redirect()->back()->with('success', 'Blog Update successfully');
+        return redirect()->route('blog.index')->with('success', 'Blog Update successfully');
     }
 
     /**

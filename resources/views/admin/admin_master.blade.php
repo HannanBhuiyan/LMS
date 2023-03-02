@@ -248,6 +248,8 @@
 
 <!-- CUSTOM JS -->
 <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
 
 
 

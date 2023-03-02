@@ -5,7 +5,9 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChapterRequest;
+use App\Models\Batch;
 use App\Models\Chapter;
+use App\Models\Course;
 
 class ChapterController extends Controller
 {
@@ -27,7 +29,9 @@ class ChapterController extends Controller
      */
     public function create()
     {
-        return view('admin.chapter.create');
+        $courses = Course::latest()->get();
+        $batches = Batch::latest()->get();
+        return view('admin.chapter.create', compact('courses', 'batches'));
     }
 
     /**
@@ -38,15 +42,25 @@ class ChapterController extends Controller
      */
     public function store(ChapterRequest $request)
     {
-        
+        // return $request;
         // validate chapter data
         $request->validated();
 
         // store chapter data
         $chapter = new Chapter();
-        $chapter->chapter_name = $request->chapter_name;
-        $chapter->save();
-        return redirect()->back()->with('success', 'Chapter add Successfully');
+
+        // check exists chapter name
+        $exists_chapter_name = Chapter::where('course_id', $request->course_id)->where('batch_id', $request->batch_id)->where('chapter_name', $request->chapter_name)->exists();
+
+        if(!$exists_chapter_name){
+            $chapter->course_id = $request->course_id;
+            $chapter->batch_id = $request->batch_id;
+            $chapter->chapter_name = $request->chapter_name;
+            $chapter->save();
+            return redirect()->back()->with('success', 'Chapter add Successfully');
+        }else{
+            return redirect()->back()->with('fail', 'Chapter Already exists');
+        }
     }
 
     /**
@@ -95,5 +109,10 @@ class ChapterController extends Controller
     {
         Chapter::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Chapter added success');
+    }
+
+    public function chapterNameGetByAjax($id)
+    {
+        return Batch::where('course_id', $id)->orderBy('batch_name', 'ASC')->get();
     }
 }

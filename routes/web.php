@@ -113,6 +113,8 @@ Route::middleware('auth:admin')->group(function(){
     // chapter
     Route::resource('chapter', ChapterController::class);
     Route::get('chapter/delete/{id}', [ChapterController::class, 'delete'])->name('chapter.delete');
+    Route::get('chapter/changeCourseName/ajax/{id}', [ChapterController::class, 'chapterNameGetByAjax']);
+
 
 
     // blog

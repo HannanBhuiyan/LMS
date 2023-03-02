@@ -14,6 +14,27 @@
             <form action="{{ route('chapter.store') }}" method="post">
                 @csrf 
                 <div class="form-group">
+                    <label class="form-label">Course Name<span class="text-danger">*</span></label>
+                    <select name="course_id" class="form-control">
+                        <option value selected>--Select Course--</option>
+                        @foreach ($courses as $course)
+                            <option value="{{ $course->id }}">{{ $course->course_name }}</option>     
+                        @endforeach
+                    </select>
+                    @error('course_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror 
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Batch Name<span class="text-danger">*</span></label>
+                    <select name="batch_id" class="form-control">
+                        <option value selected>--Select Batch--</option>
+                    </select>
+                    @error('batch_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror 
+                </div> 
+                <div class="form-group">
                     <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="chapter_name" placeholder="Exmp: Html">
                     @error('chapter_name')
@@ -27,4 +48,25 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $('select[name="course_id"]').on('change', function(event){
+            event.preventDefault();
+            let course_id = $(this).val();
+            axios.get('changeCourseName/ajax/'+ course_id)
+            .then(function(response){
+                if(response.status === 200){ 
+                      $('select[name="batch_id"]').empty();
+                    $.each(response.data, function(key, value){
+                        $('select[name="batch_id"]').append('<option value="'+ value.id +'">'+ value.batch_name +'</option>')
+                    })
+                }
+            })
+            .catch(function(error){
+                toastr.error("Something is wrong")
+            })
+        });
+    </script>
 @endsection

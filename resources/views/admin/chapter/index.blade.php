@@ -23,6 +23,8 @@
                     <thead>
                       <tr>
                         <th scope="col">SL No</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Batch Name</th>
                         <th scope="col">Chapter Name</th> 
                         <th scope="col">Action</th>
                       </tr>
@@ -32,6 +34,8 @@
                         @foreach ($chapter_datas as $chapter_data)
                         <tr>
                             <td>{{ $loop->index+1 }}</td>
+                            <td>{{ $chapter_data->relationWithCourse->course_name }} </td> 
+                            <td>{{ $chapter_data->relationWithBatch->batch_name }} </td> 
                             <td>{{ $chapter_data->chapter_name }} </td> 
                             <td>
                                 <a href="{{ route('chapter.edit', $chapter_data->id) }}" class="btn btn-success">Edit</a>

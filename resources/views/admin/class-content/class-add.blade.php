@@ -28,6 +28,33 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <label class="form-label">Batch Name<span class="text-danger">*</span></label>
+                    <select name="course_id" class="form-control form-select select2" data-bs-placeholder="Select">
+                        <option selected="" disabled="">--Select Batch--</option>
+                        @foreach($course as $item )
+                            <option value="{{ $item->id }}" >{{ $item->course_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('course_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
+                    <select name="course_id" class="form-control form-select select2" data-bs-placeholder="Select">
+                        <option selected="" disabled="">--Select Chapter--</option>
+                        @foreach($course as $item )
+                            <option value="{{ $item->id }}" >{{ $item->course_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('course_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
                 <div class="form-group">
                     <label class="form-label">Blog Name<span class="text-danger">*</span></label>
                     <select name="blog_id" class="form-control form-select select2" data-bs-placeholder="Select">
@@ -37,18 +64,6 @@
                         @endforeach
                     </select>
                     @error('blog_id')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
-                    <select name="chapter_id" class="form-control form-select select2" data-bs-placeholder="Select">
-                        <option selected="" disabled="">Select Chapter</option>
-                        @foreach($chapter as $item )
-                            <option value="{{ $item->id }}" >{{ $item->chapter_name }}</option>
-                        @endforeach
-                    </select>
-                    @error('chapter_id')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

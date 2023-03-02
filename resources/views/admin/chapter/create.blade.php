@@ -65,7 +65,7 @@
                 }
             })
             .catch(function(error){
-                toastr.error("Something is wrong")
+                console.log("Something is wrong");
             })
         });
     </script>

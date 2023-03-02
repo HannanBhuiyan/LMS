@@ -14,6 +14,29 @@
             <form action="{{ route('chapter.update', $chapter_data->id ) }}" method="post">
                 @csrf 
                 @method('PUT')
+
+                <div class="form-group">
+                    <label class="form-label">Course Name<span class="text-danger">*</span></label>
+                    <select name="course_id" class="form-control">
+                        @foreach ($courses as $course)
+                            <option value="{{ $course->id }}" {{$chapter_data->course_id == $course->id ? 'selected' : ''}}>{{ $course->course_name }}</option>     
+                        @endforeach
+                    </select>
+                    @error('course_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror 
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Batch Name{{$chapter_data->batch_id}}<span class="text-danger">*</span></label>
+                    <select name="batch_id" class="form-control" id="course_dropdown">
+                        @foreach ($batches as $batch)
+                            <option value="{{ $batch->id }}" {{$chapter_data->batch_id == $batch->id ? 'selected' : ''}}>{{ $batch->batch_name }}</option>     
+                        @endforeach
+                    </select>
+                    @error('batch_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror 
+                </div>
                 <div class="form-group">
                     <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
                     <input type="text" class="form-control" value="{{ $chapter_data->chapter_name }}" name="chapter_name" placeholder="Exmp: Html">
@@ -28,4 +51,27 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('select[name="course_id"]').on('change', function(event){
+        event.preventDefault();
+        let course_id = $(this).val();
+        
+            $.ajax({
+                url: "{{ route('course_dropdown') }}",
+                type: "POST",
+                data: {
+                    course_id : course_id,
+                },
+                success: function(data){
+                    console.log(data);
+                    $('#course_dropdown').html(data)
+                },
+            });
+        });
+    });
+</script>
 @endsection

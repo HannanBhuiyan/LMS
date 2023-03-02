@@ -114,7 +114,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::resource('chapter', ChapterController::class);
     Route::get('chapter/delete/{id}', [ChapterController::class, 'delete'])->name('chapter.delete');
     Route::get('chapter/changeCourseName/ajax/{id}', [ChapterController::class, 'chapterNameGetByAjax']);
-
+    Route::post('chapter/changeCourseName/', [ChapterController::class, 'course_dropdown'])->name('course_dropdown');
 
 
     // blog

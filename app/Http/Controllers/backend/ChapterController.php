@@ -82,7 +82,10 @@ class ChapterController extends Controller
     public function edit($id)
     {
         $chapter_data = Chapter::findOrFail($id);
-        return view('admin.chapter.edit', compact('chapter_data'));
+        $courses = Course::latest()->get();
+        $batches = Batch::where('course_id', $chapter_data->course_id)->get();
+        return view('admin.chapter.edit', compact('chapter_data','courses','batches'));
+
     }
 
     /**
@@ -94,14 +97,17 @@ class ChapterController extends Controller
      */
     public function update(ChapterRequest $request, $id)
     {
+        // return $request->batch_id;
         // validate chapter data
         $request->validated();
 
         // store chapter data
         $chapter = Chapter::findOrFail($id);
         $chapter->chapter_name = $request->chapter_name;
+        $chapter->course_id = $request->course_id;
+        $chapter->batch_id = $request->batch_id;
         $chapter->save();
-        return redirect()->back()->with('success', 'Chapter update Successfully');
+        return redirect()->route('chapter.index')->with('success', 'Chapter update Successfully');
     }
  
     public function delete($id)
@@ -114,4 +120,14 @@ class ChapterController extends Controller
     {
         return Batch::where('course_id', $id)->orderBy('batch_name', 'ASC')->get();
     }
+
+    public function course_dropdown(Request $request)
+    {
+        $batches = Batch::where('course_id', $request->course_id)->get(['id','batch_name']);
+        foreach ($batches as $batch) {
+            echo $batch->batch_name .= "<option value='$batch->id'>$batch->batch_name</option>";
+        }
+    }
+  
+
 }

@@ -33,6 +33,8 @@ class ChapterRequest extends FormRequest
     public function messages()
     {
         return [
+            'course_id.required' => 'Course is required',
+            'batch_id.required' => 'Batch is required',
             'chapter_name.required' => 'Chapter name is required',
         ];
     }

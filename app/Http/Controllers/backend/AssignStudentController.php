@@ -52,12 +52,21 @@ class AssignStudentController extends Controller
             'batch_id.required' => 'The batch field is required',
             'student_id.required' => 'The student name is required',
         ]);
-        assigncourse::create([
-            'course_id' => $request->course_id,
-            'batch_id' => $request->batch_id,
-            'student_id' => $request->student_id,
-        ]);
-        return redirect()->route('assignstudent.index')->with('success', 'Student assign successfully');
+
+        $exists_student = assigncourse::where('course_id', $request->course_id)->where('batch_id', $request->batch_id)->where('student_id', $request->student_id)->exists();
+
+        if(!$exists_student){
+            assigncourse::create([
+                'course_id' => $request->course_id,
+                'batch_id' => $request->batch_id,
+                'student_id' => $request->student_id,
+            ]);
+            return redirect()->route('assignstudent.index')->with('success', 'Student assign successfully');
+        }
+        else {
+            return redirect()->back()->with('fail', 'Student already exists !');
+        }
+        
     }
 
     /**
@@ -81,7 +90,7 @@ class AssignStudentController extends Controller
     {
         $assign_students = assigncourse::findOrFail($id);
         $course_std = Course::latest()->get();
-        $batch = Batch::latest()->get();
+        $batch = Batch::where('course_id', $assign_students->course_id)->get();
         $students = User::latest()->get();
         return view('admin.assign-student.edit-assign-student', compact('assign_students','course_std','batch','students'));
     }
@@ -106,14 +115,21 @@ class AssignStudentController extends Controller
         ]);
 
         $assign_students = assigncourse::findOrFail($id);
-        $assign_students->course_id = $request->course_id;
-        $assign_students->batch_id = $request->batch_id;
-        $assign_students->student_id = $request->student_id;
-        $assign_students->save();
 
-        return redirect()->route('assignstudent.index')->with('success', 'Assign student successfully');
+        $exists_student = assigncourse::where('course_id', $request->course_id)->where('batch_id', $request->batch_id)->where('student_id', $request->student_id)->exists();
+
+        if(!$exists_student){
+            $assign_students->course_id = $request->course_id;
+            $assign_students->batch_id = $request->batch_id;
+            $assign_students->student_id = $request->student_id;
+            $assign_students->save();
+            return redirect()->route('assignstudent.index')->with('success', 'Assign student successfully');
+        }
+        else {
+            return redirect()->back()->with('fail', 'Student already exists !');
+        }
+    
     }
-
 
     /**
      * Remove the specified resource from storage.

@@ -116,8 +116,8 @@
                     <div class="main-container container-fluid">
                         <div class="row mt-5">
                             <div class="col-md-7">
-                                <div class="card p-3">  
                                 @foreach ($class_content as $tabContent)
+                                <div class="card p-3">  
                                     <ul>    
                                         @foreach (json_decode($tabContent->class_video) as $class_ll) 
                                             <div id="{{ $tabContent->chapter->chapter_name }}{{ $loop->index }}" class="tabcontent">
@@ -129,14 +129,14 @@
                                             </div> 
                                         @endforeach 
                                         </ul>
+                                    </div>
                                 @endforeach 
-                                </div>
                             </div>
                             <div class="col-md-5"> 
                                 <div class="card p-4">
                                   <p class="course_single_title"> {{ $single_course_info->course_name }}</p> 
  
-                                   @foreach ($class_content as $item) 
+                                  @forelse ($class_content as $item)
                                     <div class="accordion" id="accordionExample{{$item->id}}">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingOne{{$item->id}}">
@@ -144,18 +144,18 @@
                                                 {{ $item->chapter->chapter_name }}
                                             </button>
                                             </h2> 
-                                            @foreach ( json_decode($item->class_video) as $class_vid)
+                                            @foreach (json_decode($item->class_video) as $class_vid)
                                                 <div id="collapseOne{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne{{$item->id}}" data-bs-parent="#accordionExample{{$item->id}}">
                                                     <div class="accordion-body">
                                                         <button class="tablinks" onclick="openCity(event, '{{ $item->chapter->chapter_name }}{{ $loop->index }}')" id="defaultOpen">{{ $item->chapter->chapter_name }} Class {{ $loop->index+1 }}</button>
                                                     </div>
-                                                </div>
-                                         
+                                                </div> 
                                             @endforeach
                                         </div> 
                                     </div>
-                                    @endforeach
-
+                                  @empty
+                                    <span style="color:red; font-weight:700; font-size: 20px" >There is not content</span>
+                                  @endforelse 
                                        
                                 </div>
                             </div>

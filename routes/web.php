@@ -134,7 +134,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     Route::get('/dashboard', [StudentDasdhboardController::class, 'index'])->name('dashboard');
     Route::post('/profile/image/edit', [ProfileController::class, 'update_image'])->name('profile.image.update');
     Route::get('/course-list', [StudentDasdhboardController::class, 'showAllCourse'])->name('student.showallcourses');
-    Route::get('/single/course/show/{id}', [StudentDasdhboardController::class, 'singleCourseShow'])->name('single.course.show');
+    Route::get('/single/course/show/{id?}/{batch_id?}', [StudentDasdhboardController::class, 'singleCourseShow'])->name('single.course.show');
 
 });
 

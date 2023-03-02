@@ -26,7 +26,7 @@
     <div class="row mt-5">
         @forelse ($assing_courses as $course)
         <div class="col-md-4">
-            <a href="{{ route('single.course.show', $course->id ) }}">
+            <a href="{{ route('single.course.show',[$course->id, $course->batch_id] ) }}">
                 <div class="card p-3">
                     <img height="350" width="100%" src="{{ $course->relationwithcourse->thumbnail }}" alt="">
                     <h1 class="course_title">{{ $course->relationwithcourse->course_name }} </h1>

@@ -120,7 +120,7 @@
             axios.get('changeBatchName/ajax/'+ batch_id)
                
                 .then(function(response){
-                    if(response.status === 200){
+                    if(response.status === 200){ 
                         let d = $('select[name=""]').empty(); 
                         $.each(response.data, function(key, value){
                             $('select[name="chapter_id"]').append( '<option value="'+ value.id +'">'+ value.chapter_name+'</option>')
@@ -128,7 +128,7 @@
                     }
                 })
                 .catch(function(error){
-                    toastr.error("Somthing Wrong! Please try again");
+                    console.log(error)
                 });
         })
 </script>

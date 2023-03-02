@@ -30,27 +30,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Batch Name<span class="text-danger">*</span></label>
-                    <select name="course_id" class="form-control form-select select2" data-bs-placeholder="Select">
-                        <option selected="" disabled="">--Select Batch--</option>
-                        @foreach($course as $item )
-                            <option value="{{ $item->id }}" >{{ $item->course_name }}</option>
-                        @endforeach
+                    <label class="form-label">Batch Name<span class="text-danger">*</span></label> 
+                    <select name="batch_id" class="form-control">
+                        <option value selected>--Select Batch--</option>
                     </select>
-                    @error('course_id')
+                    @error('batch_id')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
-                    <select name="course_id" class="form-control form-select select2" data-bs-placeholder="Select">
-                        <option selected="" disabled="">--Select Chapter--</option>
-                        @foreach($course as $item )
-                            <option value="{{ $item->id }}" >{{ $item->course_name }}</option>
-                        @endforeach
+                    <select name="chapter_id" class="form-control">
+                        <option selected value>--Select Chapter--</option>
                     </select>
-                    @error('course_id')
+                    @error('chapter_id')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -96,7 +90,52 @@
 
 @section('scripts')
 
-<script>
+<script type="text/javascript">
+     $('select[name="course_id"]').on('change', function(event){
+        event.preventDefault();
+        let course_id = $(this).val();
+        axios.get('changeCourseName/ajax/'+ course_id)
+        .then(function(response){
+            if(response.status === 200){ 
+                    $('select[name="chapter_id"]').html(" ");
+                    $('select[name="chapter_id"]').append('<option>--select batch--</option>')
+                    $('select[name="batch_id"]').empty();
+                    $('select[name="batch_id"]').append('<option>--select batch--</option>')
+                $.each(response.data, function(key, value){
+                   
+                    $('select[name="batch_id"]').append('<option value="'+ value.id +'">'+ value.batch_name +'</option>')
+                })
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    });
+
+
+    $('select[name="batch_id"]').on('change', function(event){
+            event.preventDefault();
+            let batch_id = $(this).val();
+           
+            axios.get('changeBatchName/ajax/'+ batch_id)
+               
+                .then(function(response){
+                    if(response.status === 200){
+                        let d = $('select[name=""]').empty(); 
+                        $.each(response.data, function(key, value){
+                            $('select[name="chapter_id"]').append( '<option value="'+ value.id +'">'+ value.chapter_name+'</option>')
+                        })
+                    }
+                })
+                .catch(function(error){
+                    toastr.error("Somthing Wrong! Please try again");
+                });
+        })
+</script>
+
+
+<script> 
+ 
     $(document).ready(function () {
         $('#add_more').click(function (){
             // alert('hi');

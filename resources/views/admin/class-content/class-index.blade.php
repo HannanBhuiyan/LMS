@@ -87,7 +87,7 @@
                                               <tr>
                                                 <th scope="col">SL No</th>
                                                 <th scope="col">Course Name</th>
-                                                <th scope="col">Blog Name</th>
+                                                <th scope="col">Batch Name</th>
                                                 <th scope="col">Chapter Name</th>
                                                 <th scope="col">Video URl</th> 
                                                 <th scope="col">Action</th>
@@ -98,7 +98,7 @@
                                                 <tr>
                                                     <td>{{ $loop->index+1 }}</td>
                                                     <td>{{ $items->course->course_name }}</td>
-                                                    <td>{{ Str::headline($items->relationWithblog->blog_title) }}</td>
+                                                    <td>{{ $items->batch->batch_name }}</td> 
                                                     <td>{{ $items->chapter->chapter_name }}</td>
                                                     <td> 
                                                         @if (json_decode($items->class_video))

@@ -54,21 +54,21 @@ class Class_contentController extends Controller
             'chapter_id.required' => 'The chapter field is required'
         ]);
 
-         $exist = Class_content::where('course_id', $request->course_id)->where('chapter_id', $request->chapter_id)->exists();
+        $exist = Class_content::where('course_id', $request->course_id)->where('chapter_id', $request->chapter_id)->where('chapter_id', $request->chapter_id)->exists();
 
-         if($exist){
-                return back()->with('fail', 'chapter alresdy exists in this course');
+            if($exist){
+                return back()->with('fail', 'Chapter alresdy exists in this course');
             }else{
                 $class = new Class_content;
                 $class->course_id = $request->course_id;
-                $class->blog_id = $request->blog_id;
+                $class->batch_id = $request->batch_id;
                 $class->chapter_id = $request->chapter_id;
+                $class->blog_id = $request->blog_id;
                 if($request->class_video){
                     $class->class_video = json_encode($request->class_video);
                 }
             }
          
-
         
         $class->save();
         return redirect()->route('class-content.index')->with('success', 'Class create successfully');
@@ -150,4 +150,18 @@ class Class_contentController extends Controller
         Class_content::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Class delete successfully');
     }
+
+    public function batchNameGetByAjax($id)
+    {
+        return Batch::where('course_id', $id)->orderBy('batch_name', 'ASC')->get();
+    }
+
+
+    public function chapterNameGetByAjax($id)
+    {
+        return Chapter::where('batch_id', $id)->orderBy('chapter_name', 'ASC')->get();
+    }
+
+    
+
 }

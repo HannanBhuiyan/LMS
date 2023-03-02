@@ -30,8 +30,7 @@ class ChapterController extends Controller
     public function create()
     {
         $courses = Course::latest()->get();
-        $batches = Batch::latest()->get();
-        return view('admin.chapter.create', compact('courses', 'batches'));
+        return view('admin.chapter.create', compact('courses'));
     }
 
     /**

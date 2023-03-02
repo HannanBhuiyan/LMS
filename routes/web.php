@@ -83,6 +83,10 @@ Route::middleware('auth:admin')->group(function(){
     //Class_content Route
     Route::resource('class-content', Class_contentController::class);
     Route::get('class-content/delete/{id}', [Class_contentController::class, 'destroy'])->name('class.content.delete');
+    Route::get('class-content/changeCourseName/ajax/{id}', [Class_contentController::class, 'batchNameGetByAjax']);
+    Route::get('class-content/changeBatchName/ajax/{id}', [Class_contentController::class, 'chapterNameGetByAjax']);
+
+
 
     //Batch Route
     Route::resource('batch', BatchController::class);

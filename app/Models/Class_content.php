@@ -25,4 +25,9 @@ class Class_content extends Model
     {
         return $this->belongsTo(Chapter::class,'chapter_id','id');
     }
+
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class,'batch_id','id');
+    }
 }

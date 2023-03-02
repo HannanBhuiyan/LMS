@@ -88,12 +88,11 @@
                                                     <td>
                                                         {{ $items->course->course_name }}
                                                     </td>
-                                                </tr>
+                                                </tr> 
                                                 <tr>
-                                                    <th>Blog</th>
+                                                    <th>Course Name</th>
                                                     <td>
-                                                        <b>{{ $items->relationWithblog->blog_title ?? ''}}</b>
-                                                        <p>{!! $items->relationWithblog->blog_content ?? ''!!}</p>
+                                                        {{ $items->batch->batch_name }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -102,6 +101,14 @@
                                                         {{ $items->chapter->chapter_name }}
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <th>Blog</th>
+                                                    <td>
+                                                        <b>{{ $items->relationWithblog->blog_title ?? ''}}</b>
+                                                        <p>{!! $items->relationWithblog->blog_content ?? ''!!}</p>
+                                                    </td>
+                                                </tr>
+                                               
                                                 <tr>
                                                     <th>Video URL</th>
                                                     <td>  
@@ -114,18 +121,7 @@
                                                         @endif
                                                         </div>
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Class Content</th>
-                                                    <td>
-                                                        @if ($items->class_text)
-                                                            {!! $items->class_text !!}
-                                                        @else
-                                                            <p>There is no content</p>
-                                                        @endif
-
-                                                    </td>
-                                                </tr>
+                                                </tr> 
                                             </tbody>
                                         </table>
                                     </div>

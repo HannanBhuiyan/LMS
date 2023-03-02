@@ -31,8 +31,8 @@
 
                 <div class="form-group">
                     <label class="form-label">Batch Name<span class="text-danger">*</span></label> 
-                    <select name="batch_id" class="form-control">
-                        <option value selected>--Select Batch--</option>
+                    <select name="batch_id" class="form-control" data-bs-placeholder="Select">
+                        <option value="#" disabled selected>--Select Batch--</option>
                     </select>
                     @error('batch_id')
                         <span class="text-danger">{{ $message }}</span>
@@ -41,8 +41,8 @@
 
                 <div class="form-group">
                     <label class="form-label">Chapter Name<span class="text-danger">*</span></label>
-                    <select name="chapter_id" class="form-control">
-                        <option selected value>--Select Chapter--</option>
+                    <select name="chapter_id" class="form-control" data-bs-placeholder="Select">
+                        <option selected disabled>--Select Chapter--</option>
                     </select>
                     @error('chapter_id')
                         <span class="text-danger">{{ $message }}</span>
@@ -98,11 +98,10 @@
         .then(function(response){
             if(response.status === 200){ 
                     $('select[name="chapter_id"]').html(" ");
-                    $('select[name="chapter_id"]').append('<option>--select batch--</option>')
+                    $('select[name="chapter_id"]').append('<option value="">--select batch--</option>')
                     $('select[name="batch_id"]').empty();
-                    $('select[name="batch_id"]').append('<option>--select batch--</option>')
+                    $('select[name="batch_id"]').append('<option value="">--select batch--</option>')
                 $.each(response.data, function(key, value){
-                   
                     $('select[name="batch_id"]').append('<option value="'+ value.id +'">'+ value.batch_name +'</option>')
                 })
             }
@@ -110,8 +109,7 @@
         .catch(function(error){
             console.log(error);
         })
-    });
-
+    }); 
 
     $('select[name="batch_id"]').on('change', function(event){
             event.preventDefault();
@@ -122,14 +120,14 @@
                 if(response.status === 200){
                     let d = $('select[name=""]').empty(); 
                     $('select[name="chapter_id"]').html(" ");
-                    $('select[name="chapter_id"]').append('<option>--select batch--</option>')
+                    $('select[name="chapter_id"]').append('<option value="">--select batch--</option>')
                         $.each(response.data, function(key, value){
                             $('select[name="chapter_id"]').append( '<option value="'+ value.id +'">'+ value.chapter_name+'</option>')
                         })
                     }
                 })
                 .catch(function(error){
-                    toastr.error("Somthing Wrong! Please try again");
+                  console.log('Somthing Wrong! Please try again');
                 });
         })
 </script>

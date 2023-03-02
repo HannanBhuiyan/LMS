@@ -46,12 +46,14 @@ class Class_contentController extends Controller
     {
         $request->validate([
             'course_id' => 'required',
-            'blog_id' => 'required',
-            'chapter_id' => 'required'
+            'batch_id' => 'required',
+            'chapter_id' => 'required',
+            'blog_id' => 'required'
         ],[
             'course_id.required' => 'The course field is required',
-            'blog_id.required' => 'The batch field is required',
-            'chapter_id.required' => 'The chapter field is required'
+            'batch_id.required' => 'The batch field is required',
+            'chapter_id.required' => 'The chapter field is required',
+            'blog_id.required' => 'The Blog field is required'
         ]);
 
         $exist = Class_content::where('course_id', $request->course_id)->where('chapter_id', $request->chapter_id)->where('chapter_id', $request->chapter_id)->exists();
@@ -114,15 +116,17 @@ class Class_contentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request;
+        // return $request->class_video;
         $request->validate([
             'course_id' => 'required',
             'blog_id' => 'required',
-            'chapter_id' => 'required'
+            'chapter_id' => 'required',
+            'batch_id' => 'required'
         ],[
             'course_id.required' => 'The course field is required',
-            'blog_id.required' => 'The batch field is required',
-            'chapter_id.required' => 'The chapter field is required'
+            'blog_id.required' => 'The Blog field is required',
+            'chapter_id.required' => 'The Batch field is required',
+            'batch_id.required' => 'The Batch field is required'
         ]);
 
         
@@ -133,6 +137,8 @@ class Class_contentController extends Controller
         $class->blog_id = $request->blog_id;
         if($request->class_video){
             $class->class_video = json_encode($request->class_video);
+        }else{
+            $class->class_video = NULL;
         }
         
         
@@ -164,7 +170,7 @@ class Class_contentController extends Controller
         return Chapter::where('batch_id', $id)->orderBy('chapter_name', 'ASC')->get();
     }
 
-    public function classContentEdit($id,$batchId)
+    public function classContentEdit($id, $batchId)
     {
         $class_content = Class_content::findOrFail($id);
         $course = Course::latest()->get();

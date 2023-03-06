@@ -32,11 +32,11 @@
                         @foreach ($blogs as $blog)
                         <tr>
                             <td>{{ $loop->index+1 }}</td>
-                            <td>{{ $blog->blog_title }} </td> 
+                            <td>{{ Str::limit($blog->blog_title,100) }} </td> 
                             <td>{!! Str::limit($blog->blog_content, 50, '...') !!} </td> 
                             <td>
-                                <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-info">View</a>
-                                <a href="{{ route('blog.edit', $blog->id) }}" class="btn btn-success">Edit</a>
+                                <a href="{{ route('blog.show', $blog->slug) }}" class="btn btn-info">View</a>
+                                <a href="{{ route('blog.edit', $blog->slug) }}" class="btn btn-success">Edit</a>
                                 <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaldemo8__{{ $blog->id }}">Delete</a>
                             </td>
                         </tr>

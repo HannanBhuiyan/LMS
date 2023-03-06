@@ -50,8 +50,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Blog Name<span class="text-danger">*</span></label>
-                    <select name="blog_id" class="form-control form-select select2" data-bs-placeholder="Select">
+                    <label class="form-label">Class Name<span class="text-danger">*</span></label>
+                    <input type="text" name="blog_class_name" placeholder="Class Name" class="form-control">
+                    @error('blog_class_name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Content Type<span class="text-danger">*</span></label>
+                        <div class="mb-1">
+                            <input type="radio" class="blogContentType" name="content_type" id="blog_content_type" value="blog"> <label for="blog_content_type">Blog</label>
+                        </div>
+                        <div >
+                            <input type="radio" class="blogContentType" name="content_type" id="video_content_type" value="video" ><label for="video_content_type">Video</label>
+                        </div>
+                    @error('content_type')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group" id="blogContent">
+                    <label class="form-label">Blog Name</label>
+                    <select name="blog_id" class="form-select form-control select2 blog_dropdown" data-bs-placeholder="Select">
                         <option value selected >--Select Blog--</option>
                         @foreach($blog as $item )
                             <option value="{{ $item->id }}" >{{ $item->blog_title }}</option>
@@ -62,20 +83,17 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label> Class Video Link </label>
-                    <div class="row new_properties mb-1">
-                        <div class="col-10">
-                            <input type="text" class="form-control" name="class_video[]" placeholder="Http://...">
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="close remove--new_properties">
-                                <span>&times;</span>
-                            </button>
-                        </div>
+                {{-- video part --}}
+                <div class="form-group" id="videoContent">
+                    <div class="form-group">
+                        <label> Class Video Link <span class="text-warning">(If YouTube Video, give the embed link)</span> </label>
+                        <input type="text" class="form-control class_video" name="class_video" placeholder="Http://...">
+                        
                     </div>
-                    <div class="properties-container"></div>
-                    <div class="btn btn-info mt-1" id="add_more">Add More</div>
+                    <div class="form-group">
+                        <label> Class Short Descrioption</label>
+                        <textarea name="class_desc" id="test-area"  class="form-control class_desc" placeholder="Short Description" id="" cols="30" rows="10"></textarea>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -91,6 +109,12 @@
 @section('scripts')
 
 <script type="text/javascript">
+ClassicEditor
+    .create( document.querySelector( '#test-area' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+
      $('select[name="course_id"]').on('change', function(event){
         event.preventDefault();
         let course_id = $(this).val();
@@ -131,9 +155,36 @@
                 });
         })
 </script>
+<script>
+    // blog content type
+    $("#blogContent").hide();
+    $("#videoContent").hide();
+    $('.blogContentType').on('click',function(e){
+        let value = this.value;
+        if(value == "blog"){
+            $("#blogContent").show(200);
+            $("#videoContent").hide(200);
+            // $('.class_video').val("")
+            // $('.class_desc').val("")
+        }else{
+            $("#blogContent").hide(200);
+            // $('select[name="blog_id"]').empty()
+            $("#videoContent").show(200);
+        }
+
+    })
+
+    $(document).ready(function(){ 
+        $('.blog_dropdown').select2({
+            width: '100%',
+            placeholder: "Select"
+        });
+    })
+</script>
 
 
-<script> 
+
+{{-- <script> 
  
     $(document).ready(function () {
         $('#add_more').click(function (){
@@ -155,7 +206,7 @@
             $(this).closest(".new_properties").remove();
         }); 
     });
-</script>
+</script> --}}
 <!--######## Add more options JS Code ###### -->
 
 @endsection

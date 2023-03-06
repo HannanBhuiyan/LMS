@@ -89,7 +89,7 @@
                                                 <th scope="col">Course Name</th>
                                                 <th scope="col">Batch Name</th>
                                                 <th scope="col">Chapter Name</th>
-                                                <th scope="col">Video URl</th> 
+                                                <th scope="col">Class Name</th> 
                                                 <th scope="col">Action</th>
                                               </tr>
                                             </thead>
@@ -100,13 +100,7 @@
                                                     <td>{{ $items->course->course_name }}</td>
                                                     <td>{{ $items->batch->batch_name }}</td> 
                                                     <td>{{ $items->chapter->chapter_name }}</td>
-                                                    <td> 
-                                                        @if (json_decode($items->class_video))
-                                                            @foreach (json_decode($items->class_video) as $vdo)
-                                                                <ul><a href="{{$vdo}}" target="_blank">{{$vdo}}</a></ul>
-                                                            @endforeach    
-                                                        @endif
-                                                    </td> 
+                                                    <td>{{ $items->blog_class_name }}</td>
                                                     <td>
                                                         <a href="{{ route('class-content-edit', ['id'=>$items->id,'batchId'=>$items->batch->id]) }}" class="btn btn-success">Edit</a>
                                                         <a href="{{ route('class-content.show', $items->id) }}" class="btn btn-secondary">Show</a>

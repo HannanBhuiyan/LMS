@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id'); 
             $table->unsignedBigInteger('batch_id'); 
-            $table->unsignedBigInteger('chapter_id'); 
-            $table->integer('blog_id'); 
-            $table->longText('class_video')->nullable(); 
+            $table->unsignedBigInteger('chapter_id');
+            $table->string('blog_class_name')->nullable(); 
+            $table->string('content_type')->nullable(); 
+            $table->integer('blog_id')->nullable(); 
+            $table->string('class_video')->nullable(); 
+            $table->text('class_desc')->nullable(); 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->foreign('chapter_id')->references('id')->on('chapters')->onDelete('cascade');

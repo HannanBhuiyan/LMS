@@ -1,6 +1,16 @@
 @extends('admin.admin_master')
 @section('title', 'Add Course')
 @section('content')
+<style>
+    button.remove_btn {
+    background: red;
+    color: #fff;
+    border: navajowhite;
+    padding: 2px 17px;
+    border-radius: 4px;
+    font-size: 20px;
+}
+</style>
 
 <div class="row mt-5">
     <div class="col-md-8 m-auto">
@@ -79,7 +89,6 @@
                 </div>
                 {{-- thumbnail image end --}}
 
-
                 {{-- feature image start --}}
                 <div class="form-group">
                     <label class="form-label">Feature Image <span class="text-danger">(Size = Width:588px, Height:540px)</span></label>
@@ -90,7 +99,32 @@
                     <img width="100px" height="100px" id="feature_img" src="{{ url('backend/assets/uploads/default.jpg') }}" >
                 </div>
                 {{-- feature image end --}}
+                
+                <div class="form-group">
+                    <label>Overview Content</label>
 
+                    <div class="form-group">
+                        <label for="form-label">Overview Short description</label>
+                        <textarea class="form-control" name="program_short_desc" id="" cols="30" rows="10"></textarea>
+                    </div>
+                  
+
+                    <label>Overview Items</label>
+                    <div class="row main-div mt-2">
+                        <div class="col-md-10">
+                            <input type="text" name="overview_content[]"  placeholder="Write content" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button"  class="remove_btn">&times;</button>
+                        </div>
+                    </div> 
+                  
+                    <div class="new_data"></div>
+                    <div class="btn btn-info mt-2" id="add_btn">Add</div>
+                    @error('overview_content')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
                
 
                 <div class="form-group">
@@ -100,4 +134,28 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $("#add_btn").click(function(){
+            let data = `
+                <div class="row main-div mt-2">
+                    <div class="col-md-10">
+                        <input type="text" name="overview_content[]"  placeholder="Write content" class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="remove_btn">&times;</button>
+                    </div>
+                </div> 
+            `;
+            $(".new_data").append(data);
+        })
+
+        $(document).on('click', '.remove_btn', function(){
+            $(this).closest(".main-div").remove();
+        }) 
+    })
+</script>
 @endsection

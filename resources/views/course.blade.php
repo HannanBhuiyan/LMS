@@ -8,7 +8,7 @@
             <div class="landing__inner">
                 <div class="row gx-4 gx-md-5">
                     <div class="col-md-6">
-                        <img width="100%" src="{{ asset($item->feature_image) }}" alt="image">
+                        <img width="100%" src="{{ asset($item->feature_image) }}" style="background-repeat:no-repeat" alt="image">
                     </div>
                     <div class="col-md-6">
                         <div class="landing__content">
@@ -81,23 +81,30 @@
             <div class="overview__inner">
                 <div class="overview__title text-center">
                     <h4>Program Overview</h4>
-                    <p>This UI UX Bootcamp by Umass Amherst helps you learn a design centric
-                        approach towards user interface and user Experience , including UX
-                        research, UI styling , User centered design process , Wireframes;
-                        Prototypes, Usability Testing. Practice via Capstone Projects;
-                        course wide assignments and projects & amp.
+                    <p>{{$program_overview->program_short_desc}}
                     </p>
                 </div>
+
+                @php
+                  $asd =   json_decode($program_overview->overview_content);
+              
+                @endphp
 
                 <div class="overview__box">
                     <div class="row">
                         <div class="col-md-6">
-                            @forelse ($program_overview as $key => $item)
+                            @forelse ($asd as $key => $value)
                             <div class="preBox "> 
                                 @if ($key % 2 == 0)
                                 <div class="overview">
-                                    <p>{{ $item->overview_content }}</p>
-                                    <span>0{{ $loop->index+1 }}</span>
+                                    <p>{{ $value  }}</p>
+                                    <span>
+                                        @if ($loop->index+1 >= 10)
+                                        {{ $loop->index+1 }}
+                                    @else
+                                        0{{ $loop->index+1 }}
+                                    @endif
+                                       </span>
                                 </div>  
                                 @endif
                             </div>
@@ -106,11 +113,11 @@
                             @endforelse
                         </div>
                         <div class="col-md-6">
-                            @forelse ($program_overview as $key => $item)
+                            @forelse ($asd as $key => $value)
                             <div class="preBox "> 
                                 @if ($key % 2 !== 0)
                                 <div class="overview">
-                                    <p>{{ $item->overview_content }}</p>
+                                    <p>{{ $value }}</p>
                                     <span>
                                         @if ($loop->index+1 >= 10)
                                             {{ $loop->index+1 }}
@@ -164,11 +171,11 @@
                                 <div>
                                     <textarea placeholder="Message" name="message" id=""  rows="1" style="width: 100%;" required></textarea>
                                 </div>
-                                <div class="form-check d-flex align-items-center">
+                                {{-- <div class="form-check d-flex align-items-center">
                                     <input type="checkbox" class="form-check-input mb-0 me-2" id="check2" name="option2" value="something" style="width: unset !important; border: 1px solid #d5d5d5;
                                     padding: 10px; cursor: pointer;">
                                     <label class="form-check-label" for="check2" style=" color: #33334d; user-select: none; cursor: pointer;">Opt in marketing communication Privacy Statement</label>
-                                </div>
+                                </div> --}}
                                 <button class="applyBtn mt-4" type="submit">Submit</button>
                             </form>
                         </div>

@@ -3,7 +3,27 @@
     <div class="container">
         <div class="footer__inner">
             <div class="row">
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
+                    <div class="footerBox mb-4 mb-lg-0">
+                        <h2>Company</h2> 
+                        <div class="footer__list">
+                            <ul>
+                                <li>
+                                    <p class="mb-2"><strong>Farjax tech & consulting Inc.</strong> </p>
+                                    <p class="mb-2"> <strong>Office:</strong> +1 (718)785-4636</p>
+                                     <strong>Email: </strong><a href="mailto:info@farjaxtci.com">info@farjaxtci.com</a>
+                                    <p class="mt-2">
+                                        <strong>Address:</strong> 3612 28th street, Astoria, Queens
+                                         Zip code- 1106, New York , USA 
+                                    </p>
+                                </li>
+                  
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
                     <div class="footerBox mb-4 mb-lg-0">
                         <h2>Follow Us</h2> 
                         <div class="social"> 
@@ -20,9 +40,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class="footerBox mb-4 mb-lg-0">
-                        <h2>Company</h2>
+                        <h2>Get Us </h2>
                         <div class="footer__list">
                             <ul>
                                 <li><a href="#!">About Us</a></li>
@@ -32,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class="footerBox mb-4 mb-lg-0">
                         <h2>Courses</h2>
                         <div class="footer__list">

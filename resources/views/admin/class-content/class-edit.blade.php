@@ -56,8 +56,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Blog Name<span class="text-danger">*</span></label>
-                    <select name="blog_id" class="form-control form-select select2" data-bs-placeholder="Select">
+                    <label class="form-label">Class Name<span class="text-danger">*</span></label>
+                    <input type="text" name="blog_class_name" value="{{$class_content->blog_class_name}}" class="form-control">
+                    @error('blog_class_name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Content Type<span class="text-danger">*</span></label>
+                        <div class="mb-1">
+                            <input type="radio" class="blogContentType" name="content_type" id="blog_content_type" value="blog" {{ ($class_content->content_type=="blog")? "checked" : "" }}> <label for="blog_content_type">Blog</label>
+                        </div>
+                        <div >
+                            <input type="radio" class="blogContentType" name="content_type" id="video_content_type" value="video" {{ ($class_content->content_type=="video")? "checked" : "" }}><label for="video_content_type">Video</label>
+                        </div>
+                    @error('content_type')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group" id="blogContent">
+                    <label class="form-label">Blog Name</label>
+                    <select name="blog_id" class="form-select form-control select2 blog_dropdown" data-bs-placeholder="Select">
                         <option selected="" disabled="">Select Blog</option>
                         @foreach($blog as $item )
                             <option value="{{ $item->id }}" {{ $item->id == $class_content->blog_id ? 'selected': ''}}>{{ $item->blog_title }}</option>
@@ -66,26 +87,19 @@
                     @error('blog_id')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div>                    
 
-                <div class="form-group">
-                    <label class="form-label">Video URL</label>
-                    @if (json_decode($class_content->class_video))
-                        @foreach (json_decode($class_content->class_video) as $vdo)
-                        <div class="row new_properties">
-                            <div class="col-10">
-                                <input type="text" class="form-control mb-1 delete_option" value="{{$vdo}}" name="class_video[]" placeholder="Http://...">
-                            </div>
-                            <div class="col-2">
-                                <button type="button" class="close remove--new_properties">
-                                    <span class="option_delete" >&times;</span>
-                                </button>
-                            </div>
-                        </div>
-                        @endforeach
-                    @endif
-                    <div class="properties-container"></div>
-                    <div class="btn btn-info mt-1" id="add_more">Add More</div>
+                <div class="form-group" id="videoContent">
+                    <div class="form-group">
+                        <label> Class Video Link <span class="text-warning">(If YouTube Video, give the embed link)</span> </label>
+                        <input type="text" class="form-control class_video" name="class_video" value="{{$class_content->class_video}}">
+                        
+                    </div>
+                    <div class="form-group">
+                        <label> Class Short Descrioption</label>
+                        <textarea name="class_desc" class="form-control class_desc" placeholder="Short Description" id="test-area" cols="30" rows="10">{{$class_content->class_desc}}</textarea>
+                        {{-- <input class="form-control class_desc" type="text" name="class_desc" value="{{$class_content->class_desc}}"> --}}
+                    </div>
                 </div>
  
 
@@ -99,73 +113,52 @@
 @endsection
 
 @section('scripts')
+
 <script>
-   $(document).ready(function () {
-     
-       $('#add_more').click(function (){
-           // alert('hi');
-           let new_properties_html =
-           `<div class="row new_properties">
-               <div class="col-10">
-                   <input type="text" name="class_video[]" class="form-control mb-1" placeholder="Http://...">
-               </div>
-               <div class="col-2">
-               <button type="button" class="close remove--new_properties">
-                   <span>&times;</span>
-               </button>
-               </div>
-           </div>`;
-           $('.properties-container').append(new_properties_html);
-       });
-       $(document).on('click', '.remove--new_properties', function(){
-           $(this).closest(".new_properties").remove();
-       });
-       
-   });
+    ClassicEditor
+    .create( document.querySelector( '#test-area' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+
+    // CKEDITOR.replace('class_desc');
+
+    console.log('item', "{{$class_content->content_type}}")
+    let selectedContentType =  "{{$class_content->content_type}}"
+
+    if(selectedContentType=='blog'){
+        $("#blogContent").show();
+        $("#videoContent").hide();
+        // console.log('ok')
+    }else{
+        $("#videoContent").show();
+        $("#blogContent").hide();
+        // console.log('ok not')
+    }
+
+   
+    $('.blogContentType').on('click',function(e){
+        let value = this.value;
+        if(value == "blog"){
+            $("#blogContent").show(200);
+            $("#videoContent").hide(200);
+            // console.log('blog')
+        }else{
+            $("#blogContent").hide(200);
+            $("#videoContent").show(200);
+            
+            // console.log('video')
+        }
+
+    })
+
+    $(document).ready(function(){ 
+        $('.blog_dropdown').select2({
+            width: '100%',
+            placeholder: "Select"
+        });
+    })
 </script>
-
-{{-- <script type="text/javascript">
-    $('select[name="course_id"]').on('change', function(event){
-       event.preventDefault();
-       let course_id = $(this).val();
-       axios.get('changeCourseName/ajax/'+ course_id)
-       .then(function(response){
-           if(response.status === 200){ 
-                   $('select[name="chapter_id"]').html(" ");
-                   $('select[name="chapter_id"]').append('<option>--select batch--</option>')
-                   $('select[name="batch_id"]').empty();
-                   $('select[name="batch_id"]').append('<option>--select batch--</option>')
-               $.each(response.data, function(key, value){
-                  
-                   $('select[name="batch_id"]').append('<option value="'+ value.id +'">'+ value.batch_name +'</option>')
-               })
-           }
-       })
-       .catch(function(error){
-           console.log(error);
-       })
-   });
-
-
-   $('select[name="batch_id"]').on('change', function(event){
-           event.preventDefault();
-           let batch_id = $(this).val();
-          
-           axios.get('changeBatchName/ajax/'+ batch_id)
-              
-               .then(function(response){
-                   if(response.status === 200){
-                       let d = $('select[name=""]').empty(); 
-                       $.each(response.data, function(key, value){
-                           $('select[name="chapter_id"]').append( '<option value="'+ value.id +'">'+ value.chapter_name+'</option>')
-                       })
-                   }
-               })
-               .catch(function(error){
-                   console.log("Somthing Wrong! Please try again");
-               });
-       })
-</script> --}}
 
 <script type="text/javascript">
     $(document).ready(function(){

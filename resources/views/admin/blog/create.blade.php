@@ -15,11 +15,19 @@
                 @csrf 
                 <div class="form-group">
                     <label class="form-label">Blog Title<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="blog_title" placeholder="Enter blog title">
+                    <input type="text" class="form-control" id="blog_title" name="blog_title" placeholder="Enter blog title">
                     @error('blog_title')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror 
                 </div> 
+                <div class="form-group">
+                    <label class="form-label">Slug<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="slug" id="blog_slug" placeholder="slug">
+                    @error('slug')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror 
+                </div> 
+
                 <div class="form-group">
                     <label class="form-label">Blog Name<span class="text-danger">*</span></label>
                     <textarea name="blog_content" id="test-area" cols="30" rows="10" placeholder="Enter link or text...."></textarea>
@@ -43,5 +51,9 @@
             .catch( error => {
                 console.error( error );
             } );
+
+            $('#blog_title').keyup(function() {
+                $('#blog_slug').val($(this).val().toLowerCase().split(',').join('').replace(/\s/g,"-").replace(/\?/g, '-'));
+            });
     </script>
 @endsection 

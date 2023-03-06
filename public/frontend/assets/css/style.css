@@ -46,7 +46,7 @@ a{text-decoration: none !important;}
 
 .hero__section{
     font-family: var(--p--roboto);
-    background: url(../image/section/banner1.png) rgb(0 0 0 / 28%);
+    /* background: url("{{asset($banner->banner_image)}}") rgb(0 0 0 / 28%); */
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -327,7 +327,7 @@ button.applyBtn:hover{
 
 .service__title p{
     width: 100%;
-    max-width: 593px;
+    /* max-width: 593px; */
     margin: 8px auto 26px;
     color: #5E5E5E;
 }
@@ -406,7 +406,8 @@ input#phone{
 
 /* =====footer section start here===== */
 .footer__section{
-    background: #000;
+    /* background: #000; */
+    background: #2A63BD;
     color: #fff;
     font-family: var(--p--poppins);
 }
@@ -445,7 +446,8 @@ input#phone{
 }
 
 .footer__list li a{
-    color: #7a7a7a;
+    /* color: #7a7a7a; */
+    color: #f9f9f9;
 }
 /* =====footer section end here===== */
 

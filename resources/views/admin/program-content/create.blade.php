@@ -46,6 +46,7 @@
                     @enderror
                 </div>
                 <button type="submit" class="btn btn-info mt-2">Save</button>
+                <a href="{{url('/programs')}}" class="btn btn-info mt-2" >Back</a>
            </form>
         </div>
     </div>

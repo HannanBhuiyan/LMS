@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Contact;
 use App\Models\Course;
 use App\Models\ProgramContent;
@@ -15,14 +16,15 @@ class HomeController extends Controller
     
     public function index()
     {
+        $banner = Banner::find(1);
         $courses = Course::where('status', 'on')->limit(6)->get();
-        return view('home', compact('courses'));
+        return view('home', compact('courses','banner'));
     }
 
     public function course_show($id, $slug){
          
         $programs = ProgramContent::where('course_id', $id)->get();
-        $program_overview = ProgramOverview::where('course_id', $id)->get();
+        $program_overview = ProgramOverview::where('course_id', $id)->first();
         $item = Course::where('slug', $slug)->first();
         return view('course', compact('item', 'programs', 'program_overview'));
     }

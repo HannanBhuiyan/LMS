@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\assigncourse;
 use App\Models\Course;
+use App\Models\ProgramOverview;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -19,7 +20,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $course = Course::all();
+        $course = Course::latest()->get();
         return view('admin.courses.course-index',compact('course'));
     }
 
@@ -49,12 +50,14 @@ class CourseController extends Controller
             'course_desceiption' => 'required',
             'feature_image' => 'required',
             'thumbnail' => 'required',
+            'overview_content' => 'required'
         ],[
             'course_name.required' => 'The course name is required',
             'course_name.unique' => 'The course name should be unique',
             'course_short_des.required' => 'The course short description is required',
             'feature_image.required' => 'Feature image is required',
             'thumbnail.required' => 'Thumbnail is required',
+            'overview_content.required' => 'Overview content is required !'
         ]);
 
         if($request->file('thumbnail'))
@@ -92,6 +95,16 @@ class CourseController extends Controller
         }
 
         $course->save();
+
+            if($request->program_short_desc || $request->overview_content){
+                $data = new ProgramOverview();
+                $data->course_id = $course->id;
+                $data->program_short_desc = $request->program_short_desc;
+                $data->overview_content = json_encode($request->overview_content);
+                $data->save();
+            }
+      
+
         return redirect()->route('courses.index')->with('success', 'Course create successfully');
     }
 
@@ -115,7 +128,8 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-        return view('admin.courses.course-edit', Compact('course'));
+        $programoverview = ProgramOverview::where('course_id',$id)->first();
+        return view('admin.courses.course-edit', Compact('course','programoverview'));
     }
 
     /**
@@ -127,15 +141,17 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $course = Course::findOrFail($id);
+       $course = Course::findOrFail($id);
 
         $request->validate([
             'course_name' => 'required|unique:courses,course_name,'.$course->id,
             'course_duration' => 'required',
-            'start_date' => 'required'
+            'start_date' => 'required',
+            'overview_content' => 'required'
         ],[
             'course_name.required' => 'The course name is required',
             'course_name.unique' => 'The course name should be unique',
+            'overview_content.required' => 'Overview content is required !'
         ]);
 
 
@@ -175,6 +191,15 @@ class CourseController extends Controller
         $course->course_short_des = $request->course_short_des;
         $course->course_desceiption = $request->course_desceiption;
         $course->save();
+
+        // ProgramOverview
+
+
+        $data = ProgramOverview::where('course_id',$course->id)->first();
+        $data->course_id = $course->id;
+        $data->program_short_desc = $request->program_short_desc;
+        $data->overview_content = json_encode($request->overview_content);
+        $data->save();
 
         return redirect()->route('courses.index')->with('success', 'Course update successfully');
     }

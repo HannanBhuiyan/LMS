@@ -16,7 +16,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-
+        
         $blogs = Blog::latest()->get();
         return view('admin.blog.index', compact('blogs'));
     }
@@ -40,12 +40,16 @@ class BlogController extends Controller
     public function store(BlogRequest $request)
     {
 
-        // validate bolg data
-        $request->validated();
+ 
+        $request->validate([
+            'blog_title' => 'required|unique:blogs',
+            'blog_content' => 'required',
+        ]);
 
         // store blog data
         $blog = new Blog();
         $blog->blog_title = $request->blog_title;
+        $blog->slug = $request->slug;
         $blog->blog_content = $request->blog_content;
         $blog->save();
         return redirect()->route('blog.index')->with('success', 'Blog added successfully');
@@ -58,9 +62,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $blog = Blog::findOrFail($id);
+        $blog = Blog::where('slug',$slug)->first();
         return view('admin.blog.show', compact('blog'));
     }
 
@@ -70,9 +74,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $blog = Blog::findOrFail($id);
+        $blog = Blog::where('slug',$slug)->first();
         return view('admin.blog.edit', compact('blog'));
     }
 
@@ -86,11 +90,14 @@ class BlogController extends Controller
     public function update(BlogRequest $request, $id)
     {
         // validate bolg data
-        $request->validated();
+        $request->validate([
+            'blog_title' => 'required|unique:blogs,blog_title,'.$id
+        ]);
 
         // store blog data
         $blog = Blog::findOrFail($id);
         $blog->blog_title = $request->blog_title;
+        $blog->slug = $request->slug;
         $blog->blog_content = $request->blog_content;
         $blog->save();
         return redirect()->route('blog.index')->with('success', 'Blog Update successfully');

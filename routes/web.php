@@ -19,6 +19,8 @@ use App\Http\Controllers\backend\{
     BlogController
      
 };
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\frontend\HomeController;
  
 use Illuminate\Support\Facades\Artisan;
@@ -41,6 +43,11 @@ Route::get('course/{id?}/{slug?}/', [HomeController::class, 'course_show'])->nam
 //Contact Form Route
 Route::post('contact', [HomeController::class, 'store'])->name('contact');
 
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
 
 Route::middleware('admin:admin')->group(function(){
     Route::get('/admin/login', [AdminController::class, 'loginForm']);
@@ -56,6 +63,9 @@ Route::middleware('auth:admin')->group(function(){
     //All Admin Route
     Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
+    //Banner Route
+    Route::get('/banner/index', [BannerController::class, 'index'])->name('banner.index');
+    Route::put('/banner/update/{id}', [BannerController::class, 'update'])->name('banner.update');
 
     //Course Route
     Route::resource('courses', CourseController::class);
@@ -137,6 +147,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     Route::post('/profile/image/edit', [ProfileController::class, 'update_image'])->name('profile.image.update');
     Route::get('/course-list', [StudentDasdhboardController::class, 'showAllCourse'])->name('student.showallcourses');
     Route::get('/single/course/show/{id?}/{batch_id?}', [StudentDasdhboardController::class, 'singleCourseShow'])->name('single.course.show');
+
+    Route::post('/class/wise/video', [StudentDasdhboardController::class, 'classWiseVdo'])->name('class_wise_vdo');
 
 });
 

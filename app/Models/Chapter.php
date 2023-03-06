@@ -19,6 +19,20 @@ class Chapter extends Model
     {
         return $this->belongsTo(Batch::class, 'batch_id' , 'id'); 
     }
+
+    public function ClassContents()
+    {
+        return $this->hasMany(Class_content::class,'chapter_id'); 
+    }
+
+    public function relationWithClassContentss()
+    {
+        return $this->belongsTo(Class_content::class,'chapter_id'); 
+    }
+
+   
+
+  
     
 
 }

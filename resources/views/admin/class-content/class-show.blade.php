@@ -101,27 +101,31 @@
                                                         {{ $items->chapter->chapter_name }}
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <th>Blog</th>
-                                                    <td>
-                                                        <b>{{ $items->relationWithblog->blog_title ?? ''}}</b>
-                                                        <p>{!! $items->relationWithblog->blog_content ?? ''!!}</p>
-                                                    </td>
-                                                </tr>
+
+                                                    @if ($items->content_type == 'blog')
+                                                    <tr>
+                                                        <th>Blog</th>
+                                                        <td>
+                                                            <b>{{ $items->relationWithblog->blog_title ?? ''}}</b>
+                                                            <p>{!! $items->relationWithblog->blog_content ?? ''!!}</p>
+                                                        </td>
+                                                    </tr>
+                                                        @else
+                                                        <tr>
+                                                            <th>Video URL</th>
+                                                            <td>  
+                                                                <p>{{$items->class_video}}</p>
+                                                            </td>
+                                                        </tr> 
+                                                        <tr>
+                                                            <th>Video Description</th>
+                                                            <td>  
+                                                                <p>{{$items->class_desc}}</p>
+                                                            </td>
+                                                        </tr> 
+
+                                                    @endif
                                                
-                                                <tr>
-                                                    <th>Video URL</th>
-                                                    <td>  
-                                                        <div class="row">
-                                                            @if (json_decode($items->class_video))
-                                                            @foreach (json_decode($items->class_video) as $vdo)
-                                                            <ul><a href="{{$vdo}}">{{$vdo}}</a></ul>
-                                                    
-                                                            @endforeach  
-                                                        @endif
-                                                        </div>
-                                                    </td>
-                                                </tr> 
                                             </tbody>
                                         </table>
                                     </div>

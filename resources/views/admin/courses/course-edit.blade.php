@@ -1,6 +1,16 @@
 @extends('admin.admin_master')
 @section('title', 'Update Course')
 @section('content')
+<style>
+    button.remove_btn {
+    background: red;
+    color: #fff;
+    border: navajowhite;
+    padding: 2px 17px;
+    border-radius: 4px;
+    font-size: 20px;
+}
+</style>
 
 <div class="row mt-5">
     <div class="col-md-8 m-auto">
@@ -82,7 +92,6 @@
 
 
                 {{--  for feature image --}}
-
                 <div class="form-group">
                     <label class="form-label">Feature Image <span class="text-danger">(Size = Width:392px, Height:280px)</span></label>
                     <input type="file" onchange="document.getElementById('feature_image').src=window.URL.createObjectURL(this.files[0])" class="form-control" name="feature_image">
@@ -91,8 +100,36 @@
                 <div class="form-group"> 
                     <img width="100px" height="100px" id="feature_image" src="{{ (!empty($course->feature_image)) ? asset($course->feature_image) : asset('backend/assets/uploads/default.jpg') }}">
                 </div>
-
                 {{-- for feature image --}}
+
+                <div class="form-group">
+                    <label>Overview Content</label>
+            
+                    <div class="form-group">
+                        <label for="form-label">Overview Short description</label>
+                        <textarea class="form-control" name="program_short_desc" id="" cols="30" rows="10">{{$programoverview->program_short_desc}}</textarea>
+                    </div>
+
+                    <label>Overview Items</label>
+                    @if ( $programoverview->overview_content)
+                        @foreach (json_decode($programoverview->overview_content) as $overview_content)
+                        <div class="row main-div mt-2">
+                            <div class="col-md-10">
+                                <input type="text" name="overview_content[]" value="{{ $overview_content }}"  placeholder="Write content" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="remove_btn">&times;</button>
+                            </div>
+                        </div> 
+                        @endforeach
+                    @endif 
+                  
+                    <div class="new_data"></div>
+                    <div class="btn btn-info mt-2" id="add_btn">Add</div>
+                    @error('overview_content')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
 
                 <div class="form-group">
                     <input class="btn btn-secondary btn-pill" type="submit" value="Update Course">
@@ -101,4 +138,29 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            $("#add_btn").click(function(){
+                let data = `
+                    <div class="row main-div mt-2">
+                        <div class="col-md-10">
+                            <input type="text" name="overview_content[]"  placeholder="Write content" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="remove_btn">&times;</button>
+                        </div>
+                    </div> 
+                `;
+                $(".new_data").append(data);
+            });
+
+            $(document).on('click', '.remove_btn', function(){
+                $(this).closest(".main-div").remove();
+            }) 
+        })
+    </script>
+
 @endsection

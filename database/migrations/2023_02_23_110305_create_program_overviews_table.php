@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('program_overviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->longText('overview_content');
+            $table->text('program_short_desc')->nullable();
+            $table->longText('overview_content')->nullable();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->timestamps();
         });

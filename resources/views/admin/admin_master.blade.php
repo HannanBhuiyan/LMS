@@ -251,6 +251,9 @@
  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
 
+<!-- CK Editor JS -->
+<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+
 
 
 @if (Session::has('success'))

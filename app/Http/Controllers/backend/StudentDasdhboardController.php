@@ -4,6 +4,8 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\assigncourse;
+use App\Models\Blog;
+use App\Models\Chapter;
 use App\Models\Class_content;
 use App\Models\Course;
 use App\Models\User;
@@ -22,7 +24,6 @@ class StudentDasdhboardController extends Controller
     {
         $user_id = Auth::user()->id;
         $assing_courses = assigncourse::where('student_id', $user_id)->get();
-
         return view('admin.student.student-courst-list', compact('assing_courses'));
     }
 
@@ -30,21 +31,36 @@ class StudentDasdhboardController extends Controller
     public function singleCourseShow($id, $batch_id)
     {
 
-         
+        $asignedCourseStudent = assigncourse::find($id);
+        $courses_id =  $asignedCourseStudent->course_id;
+       $chapters = Chapter::where('course_id',$courses_id)->where('batch_id',$asignedCourseStudent->batch_id)->with('ClassContents')->get();
 
-        // $user_id = Auth::user()->id;
-        $courses_id = assigncourse::findOrFail($id)->course_id;
-       
+        $single_course_info = Course::find($courses_id);
 
-       
-        $single_course_info = Course::where('id', $courses_id)->first();
-
-
-        $class_content = Class_content::where('course_id', $courses_id)->where("batch_id", $batch_id)->get();
-       
-
-        return view('admin.student.student-course-show',  compact('class_content', 'single_course_info'));
-
+        $class_content = Class_content::where('course_id', $courses_id)->where("batch_id", $batch_id)->with('chapter')->get();
+   
+        return view('admin.student.student-course-show',  compact('class_content', 'single_course_info',"chapters"));
 
     }
+
+    public function classWiseVdo(Request $request)
+    {
+ 
+        $classInfos = Class_content::find($request->data_id);
+        $blog = Blog::find($classInfos->blog_id);
+        // if($class_content->content_type == 'blog'){
+        //     $classInfos = $class_content->blog_id;
+        //     $classDesc = '';
+        // }else{
+        //     $classInfos = $class_content->class_video;
+        //     $classDesc = $class_content->class_desc;
+        // }
+
+        // $view = view('includes.classBlogOrVideo', ['item' => $classInfos]);
+
+        // $data = $view->render();
+
+        return response()->json(['data'=>$classInfos, 'blog'=>$blog]);
+    }
 }
+  

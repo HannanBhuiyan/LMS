@@ -1,15 +1,12 @@
 @extends('layouts.frontend.home_master')
 @section('title','Home')
 @section('content')
-    <section class="hero__section">
+    <section class="hero__section" style="background-image: url('{{ asset($banner->banner_image) }}">
         <div class="container">
             <div class="banner__section">
                 <div class="banner__content">
-                    <h1>Start your tech <span>journey with us</span></h1>
-                    <p>Farjax Tech & Consulting Inc is an IT consulting company headquartered
-                        in New York, USA, providing services like , Business Consulting ,
-                        Application Development & Management , Talent Acquisitions, Job
-                        Placement and training.</p>
+                    <h1>{{$banner->title_one ?? ''}} <span>{{$banner->title_two ?? ''}}</span></h1>
+                    <p>{{$banner->description ?? ''}}</p>
                     {{-- <button class="applyBtn">Apply Now</button> --}}
                     <a href="#contact" class="applybutton applyBtn">Apply Now</a>
                 </div>
@@ -22,6 +19,10 @@
     <!-- bootcamp section start here -->
     <section class="bootcamp__section section__gap" id="service">
         <div class="container">
+            <div class="bootcamp__inner">
+                <div class="service__title text-center">
+                    <h3 class="mb-5">Our online course</h3>
+                </div>
             <div class="bootcamp__inner">
                 <div class="row"> 
                     @forelse ($courses as $course)
@@ -54,7 +55,8 @@
             <div class="service__inner">
                 <div class="service__title text-center">
                     <h4>Request For Services</h4>
-                    <p>Find out more about how we can help our organization navigate its next. Let us know your areas of interest so that we can serve you better.</p>
+                    <p>To request more information about our online computer science related training, please
+                        fill out the form below. One of our representatives will contact you shortly.</p>
                 </div>
                 <div class="service__form">
                     <form action="{{ route('contact') }}" method="post">
@@ -70,11 +72,11 @@
                         <div>
                             <textarea placeholder="Message*" name="message" id=""  rows="1" style="width: 100%;" required></textarea>
                         </div>
-                        <div class="form-check d-flex align-items-center">
+                        {{-- <div class="form-check d-flex align-items-center">
                             <input type="checkbox" class="form-check-input mb-0 me-2" id="check2" name="option2" value="something" style="width: unset; border: 1px solid #d5d5d5;
                             padding: 10px; cursor: pointer;">
                             <label class="form-check-label" for="check2" style=" color: #33334d; user-select: none; cursor: pointer;">Opt in marketing communication Privacy Statement</label>
-                        </div>
+                        </div> --}}
                         <button class="applyBtn mt-4" type="submit">Submit</button>
                     </form>
                 </div>

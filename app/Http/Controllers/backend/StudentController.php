@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Batch;
 use App\Models\Course;
 use App\Models\Student;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
 class StudentController extends Controller
@@ -71,6 +72,11 @@ class StudentController extends Controller
         }
         $student->save();
 
+        Mail::send('email.studentPassword', ['password' => $request->password], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Your Password');
+        });
+
         return redirect()->route('student.index')->with('success', 'Student create successfully');
     }
 
@@ -107,14 +113,12 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $request ->validate([
-        //     'student_name' => 'required',
-        //     'student_email' => 'required|email',
-        //     'student_phone' => 'required',
-        // ],[
-        //     'course_id.required' => 'The course field is required',
-        //     'batch_id.required' => 'The course field is required',
-        // ]);
+        // return request()->password;
+        $request ->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'student_phone' => 'required',
+        ]);
 
         $student = User::findOrFail($id);
 
@@ -133,7 +137,16 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->email = $request->email;
         $student->student_phone = $request->student_phone;
+        if($request->password){
+            $student->password = Hash::make($request->password);
+            
+            Mail::send('email.studentPassword', ['password' => $request->password], function($message) use($request){
+                $message->to($request->email);
+                $message->subject('Your Password');
+            });
+        }
         $student->save();
+
 
         return redirect()->route('student.index')->with('success', 'Student update successfully');
     }

@@ -24,6 +24,7 @@
                         <tr>
                             <th scope="col">SL No</th>
                             <th scope="col">Image</th>
+                            <th scope="col">Course name</th>
                             <th scope="col">Title</th>
                             <th scope="col">Description</th>
                             <th scope="col">Action</th>
@@ -34,8 +35,9 @@
                         <tr>
                             <td>{{ $loop->index+1 }}</td>
                             <td>
-                                <img src="{{ asset($program_content->image) }}" width="100" height="100" alt="img">
+                                <img src="{{ asset($program_content->image) }}" width="50"  alt="img">
                             </td>
+                            <td>{{$program_content->relationWithCourse->course_name }}</td>
                             <td>{{ Str::limit($program_content->title, 30) }}</td>
                             <td>{{ Str::limit($program_content->description, 50, '...') }}</td> 
                             <td>

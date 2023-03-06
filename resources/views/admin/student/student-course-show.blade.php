@@ -105,6 +105,7 @@
             @if (Auth::user()->isban == 0)
             <!--app-content open-->
             <div class="main-content app-content" style="margin-top:100px">
+                {{-- {{$chapters}} --}}
                 <div class="side-app">
                     <nav aria-label="breadcrumb p-3" style="margin-left: 12px">
                         <ol class="breadcrumb">
@@ -112,42 +113,44 @@
                           <li class="breadcrumb-item active">{{ $single_course_info->course_name }}</li>
                         </ol>
                     </nav>
+                   
                     <!-- CONTAINER -->
                     <div class="main-container container-fluid">
                         <div class="row mt-5">
-                            <div class="col-md-7">
-                                @foreach ($class_content as $tabContent)
-                                <div class="card p-3">  
-                                    <ul>    
-                                        @foreach (json_decode($tabContent->class_video) as $class_ll) 
-                                            <div id="{{ $tabContent->chapter->chapter_name }}{{ $loop->index }}" class="tabcontent">
-                                                <iframe width="100%" height="450" src="{{ $class_ll }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                                <div class="card p-3 mt-4">
-                                                    <h3>{{ $tabContent->relationWithblog->blog_title }}</h3>
-                                                    <p>{!!$tabContent->relationWithblog->blog_content!!}</p>
-                                                </div>
-                                            </div> 
-                                        @endforeach 
-                                        </ul>
-                                    </div>
-                                @endforeach 
+                            <div class="col-md-7" >
+                        
+                               <div id="blogContent">
+                                    <h1 class="blogTitle mt-5"></h1>
+                                    <h1></h1>
+                                    <p class="blogDesc"></p>
+                               </div>
+
+                               <div id="videoContent">
+                                 <iframe width="100%" height="450" id="video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                 {{-- <iframe width="560" height="315" src="https://www.youtube.com/embed/c7fZcEomCvg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> --}}
+                                
+                                 <h4 class="mt-5 bg-white p-5"><strong>Description</strong></h4>
+                                 <p id="videoDescription"></p>
+                               </div>
+
                             </div>
                             <div class="col-md-5"> 
                                 <div class="card p-4">
                                   <p class="course_single_title"> {{ $single_course_info->course_name }}</p> 
- 
-                                  @forelse ($class_content as $item)
-                                    <div class="accordion" id="accordionExample{{$item->id}}">
+   
+                                  @forelse ($chapters as $chapter)
+                                    <div class="accordion" id="accordionExample{{$chapter->id}}">
                                         <div class="accordion-item">
-                                            <h2 class="accordion-header" id="headingOne{{$item->id}}">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$item->id}}" aria-expanded="true" aria-controls="collapseOne">
-                                                {{ $item->chapter->chapter_name }}
+                                            <h2 class="accordion-header" id="headingOne{{$chapter->id}}">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$chapter->id}}" aria-expanded="true" aria-controls="collapseOne">
+                                                {{ $chapter->chapter_name }}
                                             </button>
                                             </h2> 
-                                            @foreach (json_decode($item->class_video) as $class_vid)
-                                                <div id="collapseOne{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne{{$item->id}}" data-bs-parent="#accordionExample{{$item->id}}">
+
+                                            @foreach ($chapter->ClassContents as $classContent)
+                                                <div id="collapseOne{{$chapter->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne{{$chapter->id}}" data-bs-parent="#accordionExample{{$chapter->id}}">
                                                     <div class="accordion-body">
-                                                        <button class="tablinks" onclick="openCity(event, '{{ $item->chapter->chapter_name }}{{ $loop->index }}')" id="defaultOpen">{{ $item->chapter->chapter_name }} Class {{ $loop->index+1 }}</button>
+                                                        <button class="tablinks blogClassName" id="defaultOpen" data-id="{{ $classContent->id }}">{{ $classContent->blog_class_name }}</button>
                                                     </div>
                                                 </div> 
                                             @endforeach
@@ -156,6 +159,7 @@
                                   @empty
                                     <span style="color:red; font-weight:700; font-size: 20px" >There is not content</span>
                                   @endforelse 
+                                  
                                        
                                 </div>
                             </div>
@@ -209,6 +213,44 @@
 
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
+
+
+    $(document).ready(function(){
+        $('#blogContent').hide()
+         $('#videoContent').hide()
+        $('.blogClassName').click(function(){
+            let data_id = $(this).attr('data-id')
+            // alert(data_id)
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{route('class_wise_vdo')}}",
+                type: "POST",
+                data: {
+                    data_id : data_id,
+                },
+                success: function(response){
+                    console.log(response)
+                    if (response.data.content_type == 'blog') {
+                        $('#blogContent').show().addClass('bg-white p-5')
+                        $('#videoContent').hide()
+                        $('.blogTitle').html(response.blog.blog_title)
+                        $('.blogDesc').html(response.blog.blog_content)
+                    }else{
+                        $('#blogContent').hide()
+                        $('#videoContent').show()
+                        $("#video").attr('src',response.data.class_video)
+                        $('#videoDescription').html(response.data.class_desc).addClass('bg-white p-5')
+                    }
+                    
+                },
+            });
+        }); 
+    })
+
 </script>
 
 </body>

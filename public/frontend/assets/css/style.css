@@ -1,4 +1,4 @@
-
+ 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 /*
     !# hero section
@@ -325,10 +325,9 @@ button.applyBtn:hover{
     font-weight: 600;
 }
 
-.service__title p{
+.service__title p {
     width: 100%;
-    /* max-width: 593px; */
-    margin: 8px auto 26px;
+    margin: 8px auto 50px;
     color: #5E5E5E;
 }
 
@@ -405,11 +404,22 @@ input#phone{
 
 
 /* =====footer section start here===== */
+
+
+
+.follow_us_title {
+    margin-left:50px;
+} 
+
 .footer__section{
     /* background: #000; */
     background: #2A63BD;
     color: #fff;
     font-family: var(--p--poppins);
+}
+
+ .footer__course_list {
+    margin-left:50px;
 }
 
 .footerBox h2 {
@@ -422,6 +432,7 @@ input#phone{
 
 .social{
     width: 162px;
+    margin: auto;
 }
 
 .social ul li {
@@ -448,6 +459,21 @@ input#phone{
 .footer__list li a{
     /* color: #7a7a7a; */
     color: #f9f9f9;
+}
+
+
+@media screen and (max-width: 768px) {
+   .follow_us_title {
+        margin-left:0px;
+    } 
+    .social{
+        width: 162px;
+        margin: inherit;
+    }
+    .footer__course_list {
+        margin-left:0px;
+    }
+    
 }
 /* =====footer section end here===== */
 

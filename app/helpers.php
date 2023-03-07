@@ -18,7 +18,7 @@ function social_links_count(){
 
 function getFiveCourse()
 {
-    $latest_five_courses = Course::latest()->take(5)->get();
+    $latest_five_courses = Course::where('status' , 'on')->latest()->take(5)->get();
     return $latest_five_courses;
 }
  

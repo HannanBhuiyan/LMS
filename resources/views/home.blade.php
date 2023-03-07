@@ -21,7 +21,9 @@
         <div class="container">
             <div class="bootcamp__inner">
                 <div class="service__title text-center">
-                    <h3 class="mb-5">Our online course</h3>
+                    <h3 class="mb-3">Our Computer Science Courses</h3>
+                    <p> Our Computer Science Courses are designed to equip students with the knowledge and skills required to excel in the dynamic field of technology. 
+                    Our courses cover a wide range of topics including programming languages, algorithms, data structures, software engineering, artificial intelligence, and more.</p>
                 </div>
             <div class="bootcamp__inner">
                 <div class="row"> 

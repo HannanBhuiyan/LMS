@@ -1,4 +1,4 @@
-<!-- footer section start here -->
+ <!-- footer section start here -->
 <section class="footer__section section__gap">
     <div class="container">
         <div class="footer__inner">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="footerBox mb-4 mb-lg-0">
-                        <h2>Follow Us</h2> 
+                        <h2 class="follow_us_title">Follow Us</h2> 
                         <div class="social"> 
                             <ul class=" d-flex justify-content-between flex-wrap">
                                 @if (social_links_count() > 0)
@@ -42,8 +42,8 @@
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="footerBox mb-4 mb-lg-0">
-                        <h2>Get Us </h2>
-                        <div class="footer__list">
+                        <h2 class="follow_us_title">Get Us </h2>
+                        <div class="footer__list footer__course_list">
                             <ul>
                                 <li><a href="#!">About Us</a></li>
                                 <li><a href="#!">Careers</a></li> 
@@ -65,19 +65,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                {{-- <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="footerBox ">
-                        <h2>Work with us</h2>
-                        <div class="footer__list">
-                            <ul>
-                                <li><a href="#!">Become an instructor</a></li>
-                                <li><a href="#!">Blog as guest</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --}}
-
+                </div> 
             </div>
         </div>
     </div>
